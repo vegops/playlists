@@ -1,6 +1,7 @@
 "use strict";
 $( document ).ready(function() {
     console.log( "ready!" );
+
     $.get('docs/data.json',function(data){
         console.log(data);
         var albums = data;
