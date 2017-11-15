@@ -1,0 +1,29 @@
+@media screen and (max-width: 991px) {
+    /* start of large tablet styles */
+    .bgcontainer {
+        padding: 15px 0;
+        height: 80px;
+        bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    /* start of medium tablet styles */
+
+}
+
+@media screen and (max-width: 479px) {
+    /* start of phone styles */
+    body {
+        overflow: hidden;
+    }
+    .container{
+        bottom: 50px;
+        overflow-y: auto;
+    }
+    .bgcontainer {
+        bottom: 0;
+        padding: 30px;
+    }
+
+}
