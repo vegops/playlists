@@ -56,6 +56,7 @@ object {
     transform: scale(1.1);
     opacity: 1;
     box-shadow: 0 0 30px 2px #fff;
+    filter:contrast(120%)
 }
 .playlist .playlist-image {
     width: 100%;

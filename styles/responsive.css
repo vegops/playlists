@@ -12,7 +12,7 @@
 
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 520px) {
     /* start of phone styles */
     body {
         overflow: hidden;
@@ -20,6 +20,7 @@
     .container{
         bottom: 50px;
         overflow-y: auto;
+        min-width: 220px;
     }
     .bgcontainer {
         bottom: 0;
