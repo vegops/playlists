@@ -126,3 +126,12 @@ object {
 .fa:active {
     color: #4518a0;
 }
+.songs-list {
+    width: 100%;
+    background: rgba(81, 61, 121, .8);
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    border-bottom-left-radius: 75px;
+    border-bottom-right-radius: 75px;
+}

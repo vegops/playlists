@@ -29,6 +29,7 @@ try {
 	}
 }
 catch(PDOException $e) {
+  echo 'Caught exception: '.  $e->getMessage(). $e->getCode()."\n";
   fail(422);
 }
 
