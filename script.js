@@ -2,34 +2,35 @@
 $( document ).ready(function() {
     console.log( "ready!" );
 
-    $.get('docs/data.json',function(data){
-        console.log(data);
-        var albums = data;
+    $.get('api/playlist.php',{type:'playlist'},function(result){
+        var albums = result['data'];
         $.each(albums, function(i, e){
-
-            var list = new Playlist(this['name'], this['image']);
+            var list = new Playlist(this['id'], this['name'], this['image']);
             list.build();
-            console.log(list);
         });
-        $('.playlist-image').click(()=>{
-
+        $('.playlist-image').click(function() {
+            $(this).closest('.playlist').find('.songs-list').slideToggle();
         })
     });
+    $('.bgcontainer').draggable();
 
 });
 
 class Playlist {
-    constructor (name, image) {
+    constructor (id, name, image) {
         this.name = name;
         this.image = image;
+        this.id = id;
+        // this.songs = songs;
     }
     get() {
         return  this.name, this.image
     }
     build() {
-        const playlist = $('<div>').addClass('playlist');
+        const playlist = $('<div>').addClass('playlist').attr('data-id',this.id);
         const finalLabel = $('<div>').addClass('playlist-name');
         const label = this.name.toLowerCase().split("");
+        const songsList = $('<div>').addClass('songs-list closed').hide();
         if (label.length<20) {
             let empty = (20-label.length)/2;
             while ( empty>0 ) { label.unshift(" "); label.push(" "); empty-- }
@@ -45,7 +46,7 @@ class Playlist {
         const play = '<i class="fa fa-play-circle play" aria-hidden="true"></i>';
 
         player.addClass('playlist-player').append(del, edit, play);
-        $('.container').append(playlist.append(finalLabel, image, player));
+        $('.container').append(playlist.append(finalLabel, image, player, songsList));
     }
 }
 

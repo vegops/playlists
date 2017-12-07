@@ -1,5 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 body {
     background-color: #222;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 body::-webkit-scrollbar{
     display: none;
@@ -125,4 +127,67 @@ object {
 }
 .fa:active {
     color: #4518a0;
+}
+.songs-list {
+    width: 100%;
+    background: rgba(81, 61, 121, .8);
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    border-bottom-left-radius: 75px;
+    border-bottom-right-radius: 75px;
+}
+.bgcontainer {
+    width: 60%;
+    left: 20%;
+    right: 20%;
+    bottom: 10%;
+    background: rgba(102,51,153,0.2);
+    padding: 10px 0;
+    height: 200px;
+    text-align: center;
+    border-radius: 30px;
+    position: absolute;
+    color: white;
+}
+.bgcontainer h1 {
+    font-size: 40px;
+    -webkit-transition-duration: 1s;
+    transition-duration: 1s;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+    font-weight: 200;
+}
+/*----------------player style------------------*/
+.bgcontainer span {
+    background: none;
+    border: none;
+    border-radius: 50%;
+}
+.bgcontainer span i.fa {
+    padding: 10px;
+    color: white;
+    transition: 500ms ease;
+    font-size: 20px;
+    width: 48px;
+    border: 2px solid #4518a0;
+}
+.bgcontainer span i.fa:hover {
+    border: 2px solid black;
+    color: #4518a0;
+ }
+.bgcontainer span i.fa:active {
+    border: 2px dotted #4518a0;
+}
+.bgcontainer nav {
+    height: 3px;
+    margin: 5px;
+    width: 100%;
+    background: white;
+    border-radius: 2px;
+}
+.bgcontainer nav #progress-bar {
+    height: 3px;
+    background-color: #9923c7;
+    width: 0;
 }
