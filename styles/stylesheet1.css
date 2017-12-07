@@ -43,6 +43,16 @@ object {
     background: black;
     border-radius: 5px;
     box-shadow: 0 0 15px 2px #FFF;
+    min-height: 100px;
+}
+.container button.add-playlist {
+    background: no-repeat;
+    border: none;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    padding: 5px;
 }
 .playlist {
     width: 150px;
@@ -191,3 +201,86 @@ object {
     background-color: #9923c7;
     width: 0;
 }
+nav.vol-bar {
+    position: absolute;
+    right: 0%;
+    transform: rotate(-90deg);
+    left: 90%;
+    width: 60px;
+    bottom: 50px;
+    /*background: none;*/
+}
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 0px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: none;
+    border-radius: 2px;
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    /*border: 1px solid #000000;*/
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background: #4518a0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -6px;
+}
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    /*background: #ffffff;*/
+    border-radius: 2px;
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background: #4518a0;
+    cursor: pointer;
+}
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    animate: 0.2s;
+    /*background: #ffffff;*/
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    /*background: #ffffff;*/
+}
+input[type=range]::-ms-fill-upper {
+    /*background: #ffffff;*/
+}
+input[type=range]::-ms-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background: #4518a0;
+    cursor: pointer;
+}
+.vol-bar .current-vol {
+    background: #9923c7;
+    height: 4px;
+    width: 90%;
+}
+/*----------------END of player style------------------*/

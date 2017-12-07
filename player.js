@@ -4,37 +4,57 @@ $( document ).ready(function() {
     const volUp = $('#vol-up');
     const volDn = $('#vol-dn');
     const volNn = $('#vol-none');
-    const song = $('#player')[0];
-    let volume = $('#player').prop('volume',0.9);
-    let timeCounter = setInterval(trackTimer,500);
+    let song;
+    let songTime = $('#song-total');
+    let songCurrentTime = $('#song-now');
+    setTimeout(()=>{
+        song = $('#player')[0];
+        songTime.html(fixSongTime(song.duration));
+        },500,);
+    let volume = $('#player').prop('volume',.9);
+    let timeCounter;
     let progressBar = $('#progress-bar');
+
     play.click(function(){
         $(this).hide();
         pause.show();
-        setInterval(trackTimer,500);
+        timeCounter = setInterval(trackTimer,500);
     });
     pause.click(function(){
         $(this).hide();
         play.show();
         window.clearInterval(timeCounter);
     });
+
     $('.vol').click(function(){
         volumeValue();
     });
 
-    let duration = $('#song-total');
-    let current = $('#song-now');
+    $('#current-vol').val(90);
+    $('#current-vol').mousedown(function () {
+        setVol($(this));
+    });
+    $('#current-vol').mouseup(function () {
+        setVol($(this))
+    })
 
-    duration.html(fixSongTime(song.duration));
+    function setVol(element) {
+        $('#player').prop('volume',element.val()/100);
+        $('.current-vol').css('width',element.val()+'%');
+        volumeValue();
+    }
+
+    // songTime.html(fixSongTime(song.duration));
+    console.log(song);
 
     function trackTimer() {
         if(song.ended) {
-            current.html('00:00');
+            songCurrentTime.html('00:00');
             progressBar.css('width',0);
+            play.click(true);
         } else {
-            current.html(fixSongTime(song.currentTime));
+            songCurrentTime.html(fixSongTime(song.currentTime));
             let width = song.currentTime / song.duration;
-            console.log(width);
             progressBar.css('width', width * 100 + '%');
         }
     }
@@ -52,15 +72,19 @@ $( document ).ready(function() {
         if (volume >= 1) {
             volUp.hide();
             volNn.show();
-        }else if (volume <= 0.2 ) {
+            volDn.show();
+        }else if (volume <= 0.1 ) {
             volDn.hide();
             volNn.show();
+            volUp.show();
         } else {
             volUp.show();
             volDn.show();
             volNn.hide();
         }
         console.log(volume);
+        $('.current-vol').css('width',volume*100+'%');
+        $('#current-vol').val(volume*100);
     };
     volumeValue();
 
