@@ -2,7 +2,11 @@
   {
     "id": 0,
     "name": "Rise and shine",
-    "image": "http://www.designformusic.com/wp-content/uploads/2016/04/orion-trailer-music-album-cover-design.jpg"
+    "image": "http://www.designformusic.com/wp-content/uploads/2016/04/orion-trailer-music-album-cover-design.jpg",
+    "songs": [
+      { "Halo": "http://www.ctje.nl/dl/Music/Beyonc%C3%A9/I%20Am...%20Sasha%20Fierce/02%20Halo.mp3" },
+      { "All the single ladies": "http://www.ctje.nl/dl/Music/Beyonc%C3%A9/I%20Am...%20Sasha%20Fierce/07%20Single%20ladies%20(Put%20A%20Ring%20On%20It).mp3" }
+    ]
   },
   {
     "id": 1,
