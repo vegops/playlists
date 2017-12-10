@@ -15,35 +15,71 @@ $( document ).ready(function() {
     $('.bgcontainer').draggable();
 
     $('.add-playlist').click(function () {
-        swal({
-            title: 'Add new playlist',
-            input: 'email',
-            showCancelButton: true,
-            confirmButtonText: 'Submit',
-            showLoaderOnConfirm: true,
-            preConfirm: (email) => {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        if (email === 'taken@example.com') {
-                            swal.showValidationError(
-                                'This email is already taken.'
-                            )
-                        }
-                        resolve()
-                    }, 2000)
-                })
-            },
-            allowOutsideClick: false
-        }).then((result) => {
-            if (result.value) {
-                swal({
-                    type: 'success',
-                    title: 'Ajax request finished!',
-                    html: 'Submitted email: ' + result.email
-                })
-            }
-        })
+        $('#new').slideDown();
+    });
+    $('.form-block i.fa-times').click(function(){
+        $(this).closest('.form-block').slideUp();
     })
+    $('.bgcontainer').mouseup(function () {
+        $(this).css('background','#130419');
+    })
+    
+    $('#add-song').click(function () {
+        const song = $('#song-box').clone();
+        $('.new-list-songs').append(song.hide());
+        song.append('<i class="fa fa-trash song-remove" aria-hidden="true"></i>\n')
+        song.removeAttr('id').slideDown().find('input').val('');
+        $('.song-remove').click(function () {
+            $(this).closest('.song').slideUp();
+            setTimeout(()=>{$(this).closest('.song').remove();},500);
+        });
+    })
+    
+    $('#new div.new-playlist').submit(function(e) {
+        e.preventDefault();
+        let reqFlag = 1;
+        let listName = $('#new .new-playlist #name');
+        let listImage = $('#new .new-playlist #image');
+        if(listName.val().length > 20){
+            reqFlag = 0;
+            listName.closest('.new-list-name').find('.error').css('display','block');
+        } else { listName.closest('.new-list-name').find('.error').hide(); }
+        if(!/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(listImage.val())){
+            reqFlag = 0;
+            listImage.closest('.new-list-img').find('.error').css('display','block');
+        } else { listImage.closest('.new-list-img').find('.error').hide(); }
+
+        let newSongs = [];
+        $('.song').each(function (index) {
+            newSongs.push({
+                name: $(this).find('input[name="song"]').val(),
+                url: $(this).find('input[name="link"]').val()
+            })
+        })
+        let data = {
+            name: listName.val(),
+            image: listImage.val(),
+            songs: newSongs
+        };
+        reqFlag === 1 ?
+        $.post('./api/playlist',data ,function (result) {
+            console.log("response:");
+            console.log(result);
+        })
+            .success(()=>{
+                swal('Done!','Your playlist was added!','success');
+                $('#new input').not('.submit').val('').closest('#new').fadeOut();
+            })
+            .fail(()=>{swal(
+                'Oops...',
+                'Something went wrong!',
+                'error'
+            )}) : swal(
+            'Oops...',
+            'Please fill the form correctly!',
+            'error'
+            ) ;
+    });
 });
 
 class Playlist {

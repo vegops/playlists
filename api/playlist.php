@@ -4,6 +4,11 @@ if(!empty($_GET['404']) || empty($_GET['type']) || !in_array($_GET['type'],array
 	fail(404);
 }
 
+/*function test(){
+    var_dump($_POST);
+    die();
+};
+test();*/
 try {
 	// db connection
 	$servername = "localhost";

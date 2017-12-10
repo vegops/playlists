@@ -284,3 +284,96 @@ input[type=range]::-ms-thumb {
     width: 90%;
 }
 /*----------------END of player style------------------*/
+/*----------------START of form style------------------*/
+.forms > div {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 100px 150px;
+    background: rgba(44,3,44,0.5);
+}
+.forms > div > .new-playlist {
+    padding: 50px;
+    background: #ece6ff;
+    border-radius: 5px;
+    box-shadow: 0 0 50px 0px #666;
+    position: relative;
+}
+.forms > div > .new-playlist input {
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 70%;
+}
+.forms > div > .new-playlist span.error {
+    display: block;
+    color: red;
+    display: none;
+}
+.forms > div > .new-playlist input.submit {
+    width: 45%;
+    margin-top: 20px;
+    background: #4518a0;
+    color: #fff;
+    position: relative;
+    transition: 300ms ease;
+}
+.forms > div > .new-playlist input.submit:hover {
+    background: #9923c7;
+}
+.forms > div > .new-playlist h3, .forms > div > .new-playlist h4 {
+    text-align: center;
+    margin-top: 0;
+}
+.forms > div > .new-playlist i.fa-music {
+    position: absolute;
+    right: -30px;
+    bottom: -30px;
+    padding: 40px;
+    margin: 10px;
+    color: white;
+    font-size: 40px;
+    background: #ece6ff;
+}
+.forms > div > .new-playlist i.fa-music:hover {
+    transform: none;
+}
+.forms > div > .new-playlist i.fa-times {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 20px;
+    color: #fff;
+    background: none;
+    font-size: 20px;
+    transition: 300ms ease;
+    cursor: pointer;
+}
+.forms > div > .new-playlist i.fa-times:hover {
+    transform: rotate(90deg);
+    color: #9923c7;
+}
+.forms > div > form .new-list-songs {
+    margin-top: 10px;
+}
+.forms > div#new {
+    display: none;
+}
+.forms > div form#new-list-songs .song {
+    display: flex;
+}
+.forms > div form#new-list-songs .song span.song-field {
+    display: inline-flex;
+    width: 100%;
+}
+.forms > div form#new-list-songs label {
+    margin-top: 5px;
+}
+.forms > div form#new-list-songs .song-remove {
+    background: none;
+    cursor: pointer;
+    margin-right: -20px;
+    font-size: 16px;
+}

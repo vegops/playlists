@@ -44,9 +44,6 @@ $( document ).ready(function() {
         volumeValue();
     }
 
-    // songTime.html(fixSongTime(song.duration));
-    console.log(song);
-
     function trackTimer() {
         if(song.ended) {
             songCurrentTime.html('00:00');
@@ -82,7 +79,6 @@ $( document ).ready(function() {
             volDn.show();
             volNn.hide();
         }
-        console.log(volume);
         $('.current-vol').css('width',volume*100+'%');
         $('#current-vol').val(volume*100);
     };
