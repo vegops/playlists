@@ -48,7 +48,7 @@ $( document ).ready(function() {
         if(song.ended) {
             songCurrentTime.html('00:00');
             progressBar.css('width',0);
-            play.click(true);
+            pause.click(true);
         } else {
             songCurrentTime.html(fixSongTime(song.currentTime));
             let width = song.currentTime / song.duration;
