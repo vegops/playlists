@@ -19,11 +19,14 @@ $( document ).ready(function() {
         $(this).hide();
         pause.show();
         timeCounter = setInterval(trackTimer,500);
+        $('.left .playlist-image').toggleClass('paused');
     });
     pause.click(function(){
         $(this).hide();
         play.show();
         window.clearInterval(timeCounter);
+        const matrix = $('.left img').css('transform');
+        $('.left .playlist-image').toggleClass('paused').css('transform',matrix);
     });
 
     $('.vol').click(function(){
@@ -48,7 +51,7 @@ $( document ).ready(function() {
         if(song.ended) {
             songCurrentTime.html('00:00');
             progressBar.css('width',0);
-            pause.click(true);
+            pause.trigger('click');
         } else {
             songCurrentTime.html(fixSongTime(song.currentTime));
             let width = song.currentTime / song.duration;

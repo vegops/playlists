@@ -1,4 +1,5 @@
 "use strict";
+const allPlaylists = [];
 $( document ).ready(function() {
     console.log( "ready!" );
 
@@ -26,16 +27,25 @@ $( document ).ready(function() {
                 }else {
                     songList.toggleClass('show');
                     setTimeout(()=>{
-                        const height = songList.find('li').length*20+134;
-                        songList.css('height',height);
                         songList.toggleClass('open');
-                        console.log(height);
-                    },300)
+                        let height = songList.find('.song-list-sheet').height()+134;
+                        height > 300 ? height = 300 : height;
+                        songList.css('height',height);
+                    },300);
                 };
+                $('ol.song-list-sheet li').click(function () {
+                    $('#player').attr('src',$(this).attr('data-link'));
+                    $('#play').trigger('click');
+                    const list = $(this).closest('.playlist').find('ol').clone();
+                    const img = $(this).closest('.playlist').find('.playlist-image:first').clone().addClass('paused');
+                    $('div.right').html(list);
+                    $('div.left').html(img);
+
+                });
             });
             $('.playlist i.delete').click(function(){
                 const playlist = $(this).closest('.playlist');
-                if( playlist.toggleClass('opened') ) { playlist.find('.playlist-image')[0].click(true); };
+                if( playlist.hasClass('opened') ) { playlist.find('.playlist-image')[0].click(true); };
                 $(this).closest('.playlist').css('transform','rotateY(180deg)');
                 $(this).closest('.playlist').find('.playlist-del').fadeIn();
 
@@ -60,7 +70,26 @@ $( document ).ready(function() {
                 $(this).closest('.playlist').find('.playlist-del').fadeOut();
                 $(this).closest('.playlist').css('transform','rotateY(0deg)');
             });
-        });
+
+            $('.play').click(function () {
+                $('.needle').toggleClass('active');
+                const list = $(this).closest('.playlist').find('ol').clone();
+                const img = $(this).closest('.playlist').find('.playlist-image:first').clone().addClass('paused');
+                $('div.right').html(list);
+                $('.mid h1').html($(this).closest('.playlist').find('ol li:first').text())
+                    $('ol li').click(function () {
+                        $('#player').attr('src',$(this).attr('data-link'));
+                        $('#play').trigger('click');
+                    });
+                    setTimeout(()=>{
+                        $('.needle').toggleClass('active');
+                        $('div.left').html(img);
+                        setTimeout(()=>{
+                            $(this).closest('.playlist').find('ol li:first').trigger('click');
+                        },1200);
+                    },600)
+                });
+        })
     };
     getAlbums();
     $('.bgcontainer').draggable();
@@ -103,7 +132,7 @@ $( document ).ready(function() {
         let newSongs = [];
         $('.song').each(function (index) {
             newSongs.push({
-                name: $(this).find('input[name="song"]').val(),
+                name: $(this).find('input[name="song"]').val().replace('.mp3',''),
                 url: $(this).find('input[name="link"]').val()
             })
         })
@@ -129,6 +158,7 @@ $( document ).ready(function() {
             'error'
             ) ;
     });
+
 });
 
 class Playlist {
@@ -165,6 +195,7 @@ class Playlist {
 
         player.addClass('playlist-player').append(del, edit, play);
         $('#album-list').append(playlist.append(finalLabel, image, player, songsList, delBox));
+        allPlaylists.push({id: this.id, name: this.name});
 
         $.get('./api/playlist/'+this.id+'/songs',function (result) {
             result.data.songs.forEach(function (item, index) {
@@ -191,6 +222,7 @@ $.each( [ "put", "delete" ], function( i, method ) {
         });
     };
 });
+console.log(allPlaylists);
 
 
 

@@ -85,7 +85,7 @@ i.fa {
     z-index: 3;
     transform: scale(1.1);
 }
-.playlist .playlist-image {
+.playlist-image {
     width: 100%;
     border-radius: 50%;
     opacity: 0.85;
@@ -202,6 +202,8 @@ i.fa {
 }
 .songs-list.open ol.song-list-sheet {
     padding-top: 40px;
+    overflow: auto;
+    max-height: 230px;
 }
 .songs-list.show {
     opacity: 1;
@@ -218,16 +220,21 @@ i.fa {
 }
 .songs-list ol.song-list-sheet {
     background: rgb(19, 4, 25);
-    position: absolute;
+    position: relative;
     bottom: 74px;
     top: 0;
     left: 0;
     right: 0;
-    opacity: 1;
+    opacity: 0;
     z-index: 2;
     margin-left: -15px;
     color: #fff;
     text-align: left;
+    height: max-content;
+    padding-bottom: 20px;
+}
+.songs-list.open ol.song-list-sheet {
+    opacity: 1;
 }
 .songs-list ol.song-list-sheet li {
     transition: 300ms ease;
@@ -238,9 +245,10 @@ i.fa {
     opacity: 1;
     cursor: pointer;
 }
-.songs-list.open ol.song-list-sheet li:hover {
+ol.song-list-sheet li:hover {
     color: #9923c7;
     font-weight: bold;
+    cursor: pointer;
 }
 .bgcontainer {
     width: 60%;
@@ -378,6 +386,31 @@ input[type=range]::-ms-thumb {
     height: 4px;
     width: 90%;
 }
+.right {
+
+}
+.right ol {
+    max-height: 180px;
+    overflow: auto;
+}
+.left .playlist-image {
+    max-width: 180px;
+    animation: 7s linear rotation infinite;
+}
+.needle {
+    position: absolute;
+    left: -60px;
+    top: -20px;
+    width: 200px;
+    transition: 800ms ease-in-out;
+    z-index: 2;
+}
+.needle.active {
+    transform: rotate(-60deg);
+}
+.left .playlist-image.paused {
+    animation: paused rotation;
+}
 /*----------------END of player style------------------*/
 /*----------------START of form style------------------*/
 .forms > div {
@@ -473,4 +506,37 @@ input[type=range]::-ms-thumb {
     cursor: pointer;
     margin-right: -20px;
     font-size: 16px;
+}
+
+/*----------------END of form style------------------*/
+/*----------------START of scroll-bar style------------------*/
+
+ol.song-list-sheet::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+    border-radius: 2px;
+}
+
+ol.song-list-sheet::-webkit-scrollbar
+{
+    width: 4px;
+    background-color: #F5F5F5;
+}
+
+ol.song-list-sheet::-webkit-scrollbar-thumb
+{
+    border-radius: 2px;
+    background-image: -webkit-gradient(linear,
+    left bottom,
+    left top,
+    color-stop(0.44, #4518a0),
+    color-stop(0.72, #9923c7),
+    color-stop(0.86, #CFB2C6));
+}
+
+
+@keyframes rotation {
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
 }
