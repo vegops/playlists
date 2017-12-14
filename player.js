@@ -4,22 +4,36 @@ $( document ).ready(function() {
     const volUp = $('#vol-up');
     const volDn = $('#vol-dn');
     const volNn = $('#vol-none');
-    let song;
+    let song = $('#player')[0];
     let songTime = $('#song-total');
     let songCurrentTime = $('#song-now');
     setTimeout(()=>{
-        song = $('#player')[0];
         songTime.html(fixSongTime(song.duration));
         },500,);
     let volume = $('#player').prop('volume',.9);
     let timeCounter;
     let progressBar = $('#progress-bar');
 
-    play.click(function(){
+    play.click(function(n){
         $(this).hide();
         pause.show();
         timeCounter = setInterval(trackTimer,500);
-        $('.left .playlist-image').toggleClass('paused');
+        var img = $('.left .playlist-image');
+        img.hasClass('paused') ? img.toggleClass('paused'): null;
+        const duration = new Promise((resolve, reject) => {
+            if (isNaN(song.duration)) {
+                resolve(song.duration);
+            } else {
+                reject(
+                    setTimeout(()=>{
+                        resolve(song.duration)
+                    },500)
+                )
+            }
+        });
+        duration.then(songTime.html( fixSongTime(song.duration)));
+
+        debugger;
     });
     pause.click(function(){
         $(this).hide();

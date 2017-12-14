@@ -35,11 +35,21 @@ $( document ).ready(function() {
                 };
                 $('ol.song-list-sheet li').click(function () {
                     $('#player').attr('src',$(this).attr('data-link'));
-                    $('#play').trigger('click');
                     const list = $(this).closest('.playlist').find('ol').clone();
                     const img = $(this).closest('.playlist').find('.playlist-image:first').clone().addClass('paused');
-                    $('div.right').html(list);
-                    $('div.left').html(img);
+                    if (img.attr('src') === $('.left .playlist-image').attr('src') ) {
+                        $('#play').trigger('click');
+                    } else {
+                        $('div.right').html(list);
+                        $('.needle').toggleClass('active');
+                        setTimeout(()=>{
+                            $('.needle').toggleClass('active');
+                            $('div.left').html(img);
+                            setTimeout(()=>{
+                                $('#play').trigger('click');
+                            },1200);
+                        },600)
+                    }
 
                 });
             });
@@ -72,22 +82,25 @@ $( document ).ready(function() {
             });
 
             $('.play').click(function () {
+                $('#pause').trigger('click');
                 $('.needle').toggleClass('active');
                 const list = $(this).closest('.playlist').find('ol').clone();
                 const img = $(this).closest('.playlist').find('.playlist-image:first').clone().addClass('paused');
                 $('div.right').html(list);
+                $('#player').attr('src',$(this).closest('.playlist').find('ol li:first').attr('data-link'));
+                setTimeout(()=>{
+                    $('.needle').toggleClass('active');
+                    $('div.left').html(img);
+                    setTimeout(()=>{
+                        $('#play').trigger('click');
+                    },1200);
+                },600)
                 $('.mid h1').html($(this).closest('.playlist').find('ol li:first').text())
-                    $('ol li').click(function () {
+
+                    $('.right ol li').click(function () {
                         $('#player').attr('src',$(this).attr('data-link'));
                         $('#play').trigger('click');
                     });
-                    setTimeout(()=>{
-                        $('.needle').toggleClass('active');
-                        $('div.left').html(img);
-                        setTimeout(()=>{
-                            $(this).closest('.playlist').find('ol li:first').trigger('click');
-                        },1200);
-                    },600)
                 });
         })
     };
@@ -222,7 +235,6 @@ $.each( [ "put", "delete" ], function( i, method ) {
         });
     };
 });
-console.log(allPlaylists);
 
 
 
