@@ -1,0 +1,76 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 14, 2017 at 02:01 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `playlist`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `playlists`
+--
+
+CREATE TABLE `playlists` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) CHARACTER SET hp8 COLLATE hp8_bin NOT NULL,
+  `image` varchar(1000) CHARACTER SET hp8 COLLATE hp8_bin NOT NULL,
+  `songs` text CHARACTER SET hp8 COLLATE hp8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `playlists`
+--
+
+INSERT INTO `playlists` (`id`, `name`, `image`, `songs`) VALUES
+(14, 'Barabas', 'https://f4.bcbits.com/img/a2939269798_10.jpg', '[{\"name\":\"Take me to Church\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/02%20Halo.mp3\"},{\"name\":\"halo\",\"url\":\"http:\\/\\/ks358449.kimsufi.com\\/pub\\/tunestore\\/Irish\\/2013\\/Hozier%20-%20Take%20Me%20To%20Church.mp3\"}]'),
+(15, 'Beyonce', 'https://hairdefinition.files.wordpress.com/2012/07/beyonce_iam_v9.jpg', '[{\"name\":\"If I Were A Boy\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/01%20If%20I%20Were%20A%20Boy.mp3\"},{\"name\":\"Halo\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/02%20Halo.mp3\"},{\"name\":\"Dissapear\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/03%20Dissapear.mp3\"},{\"name\":\"Broken-Hearted Girl\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/04%20Broken-Hearted%20Girl.mp3\"},{\"name\":\"Ave Maria\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/05%20Ave%20Maria.mp3\"},{\"name\":\"Satellites\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/06%20Satellites.mp3\"},{\"name\":\"Single ladies\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/07%20Single%20ladies%20(Put%20A%20Ring%20On%20It).mp3\"},{\"name\":\"Radio\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/08%20Radio.mp3\"},{\"name\":\"Diva\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/10%20Sweet%20Dreams.mp3\"},{\"name\":\"Video Phone\",\"url\":\"http:\\/\\/www.ctje.nl\\/dl\\/Music\\/Beyonc%C3%A9\\/I%20Am...%20Sasha%20Fierce\\/11%20Video%20Phone.mp3\"}]'),
+(16, 'Backstreet Boys', 'https://is1-ssl.mzstatic.com/image/thumb/Music/2d/49/cb/mzi.ogbzvpjr.jpg/600x600bf.jpg', '[{\"name\":\" All I Have To Give\",\"url\":\"http:\\/\\/dl.asra-music2.com\\/foreign%20full%20album\\/Backstreet%20Boys\\/Backstreet%20Boys%20-%20The%20Hits%20Chapter%20One\\/06%20%20Backstreet%20Boys%20-%20All%20I%20Have%20To%20Give.mp3\"},{\"name\":\"As Long As You Love Me\",\"url\":\"http:\\/\\/dl.asra-music2.com\\/foreign%20full%20album\\/Backstreet%20Boys\\/Backstreet%20Boys%20-%20The%20Hits%20Chapter%20One\\/03%20%20Backstreet%20Boys%20-%20As%20Long%20As%20You%20Love%20Me.mp3\"},{\"name\":\"I Want It That Way\",\"url\":\"http:\\/\\/dl.asra-music2.com\\/foreign%20full%20album\\/Backstreet%20Boys\\/Backstreet%20Boys%20-%20The%20Hits%20Chapter%20One\\/01%20%20Backstreet%20Boys%20-%20I%20Want%20It%20That%20Way.mp3\"},{\"name\":\"Larger Than Life\",\"url\":\"http:\\/\\/dl.asra-music2.com\\/foreign%20full%20album\\/Backstreet%20Boys\\/Backstreet%20Boys%20-%20The%20Hits%20Chapter%20One\\/07%20%20Backstreet%20Boys%20-%20Larger%20Than%20Life.mp3\"},{\"name\":\"The Call\",\"url\":\"http:\\/\\/dl.asra-music2.com\\/foreign%20full%20album\\/Backstreet%20Boys\\/Backstreet%20Boys%20-%20The%20Hits%20Chapter%20One\\/09%20%20Backstreet%20Boys%20-%20The%20Call.mp3\"},{\"name\":\"Quit Playing Games\",\"url\":\"http:\\/\\/dl.asra-music2.com\\/foreign%20full%20album\\/Backstreet%20Boys\\/Backstreet%20Boys%20-%20The%20Hits%20Chapter%20One\\/05%20%20Backstreet%20Boys%20-%20Quit%20Playing%20Games%20%5BWith%20My%20Heart%5D.mp3\"},{\"name\":\"I\'ll Never Break Your Heart\",\"url\":\"http:\\/\\/dl.asra-music2.com\\/foreign%20full%20album\\/Backstreet%20Boys\\/Backstreet%20Boys%20-%20The%20Hits%20Chapter%20One\\/08%20%20Backstreet%20Boys%20-%20I%27ll%20Never%20Break%20Your%20Heart.mp3\"},{\"name\":\"Everybody\",\"url\":\"http:\\/\\/dl.asra-music2.com\\/foreign%20full%20album\\/Backstreet%20Boys\\/Backstreet%20Boys%20-%20The%20Hits%20Chapter%20One\\/02%20%20Backstreet%20Boys%20-%20Everybody%20%5BBackstreet%27s%20Back%5D.mp3\"},{\"name\":\"Show Me The Meaning Of Being Lonely\",\"url\":\"http:\\/\\/dl.asra-music2.com\\/foreign%20full%20album\\/Backstreet%20Boys\\/Backstreet%20Boys%20-%20The%20Hits%20Chapter%20One\\/04%20%20Backstreet%20Boys%20-%20Show%20Me%20The%20Meaning%20Of%20Being%20Lonely.mp3\"}]'),
+(17, 'Enrique Iglesias', 'http://blog.tapuz.co.il/AStars/images/3394097_336.jpg', '[{\"name\":\"Hero.mp3   \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Enrique%20Iglesias%20-%20Hero.mp3\"},{\"name\":\"Noche Y De Dia\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Enrique%20Iglesias%20-%20Noche%20Y%20De%20Dia%20%28feat.%20Yandel%20Juan%20Magan%29.mp3\"},{\"name\":\"Tired Of Being Sorry.mp3  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Enrique%20Iglesias%20-%20Tired%20Of%20Being%20Sorry.mp3\"},{\"name\":\"Turn The Night Up.mp3  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Enrique%20Iglesias%20-%20Turn%20The%20Night%20Up.mp3\"},{\"name\":\"You and I.mp3  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Enrique%20Iglesias%20-%20You%20and%20I.mp3\"},{\"name\":\"Tonight.mp3  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Enrique%20Iglesias%20feat%20Pitbull%20-%20Tonight.mp3\"},{\"name\":\"Baby I like it.mp3\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Enrique%20Iglesias%20ft.%20Pitbull%20-%20Baby%20I%20like%20it.mp3\"}]'),
+(18, 'Green Day', 'https://consequenceofsound.files.wordpress.com/2016/09/greenday-feat.jpg', '[{\"name\":\"Boulevard of broken dreams (R) \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Green%20Day%20-%20Boulevard%20of%20broken%20dreams%20%28R%29.mp3\"},{\"name\":\"Carpe Diem \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Green%20Day%20-%20Carpe%20Diem.mp3\"},{\"name\":\"Fuck Time   \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Green%20Day%20-%20Fuck%20Time.mp3\"},{\"name\":\"I Want To Be Alone    \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Green%20Day%20-%20I%20Want%20To%20Be%20Alone.mp3\"},{\"name\":\"Lazy Bones  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Green%20Day%20-%20Lazy%20Bones.mp3\"},{\"name\":\"Nuclear Family  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Green%20Day%20-%20Nuclear%20Family.mp3\"},{\"name\":\"Troublemaker   \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Green%20Day%20-%20Troublemaker.mp3\"},{\"name\":\"Wake Me Up When September Ends  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Green%20Day%20-%20Wake%20Me%20Up%20When%20September%20Ends.mp3\"}]'),
+(19, 'Jennifer Lopez', 'https://is3-ssl.mzstatic.com/image/thumb/Music/v4/21/37/b1/2137b14e-203c-6012-bd92-6493fe05ad76/886443535084.jpg/1200x630bb.jpg', '[{\"name\":\"Aint It Funny   \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Jennifer%20Lopez%20-%20Aint%20It%20Funny.mp3\"},{\"name\":\"Booty (feat. Pitbull)  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Jennifer%20Lopez%20-%20Booty%20%28feat.%20Pitbull%29.mp3\"},{\"name\":\"Brave \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Jennifer%20Lopez%20-%20Brave.mp3\"},{\"name\":\"Jenny From the Block  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Jennifer%20Lopez%20-%20Jenny%20From%20the%20Block.mp3\"},{\"name\":\"Love Dont Cost A Thing \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Jennifer%20Lopez%20-%20Love%20Dont%20Cost%20A%20Thing.mp3\"},{\"name\":\"Papi (BEST FM UA) \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Jennifer%20Lopez%20-%20Papi%20%28BEST%20FM%20UA%29.mp3\"},{\"name\":\"Waiting for tonight \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Jennifer%20Lopez%20-%20Waiting%20for%20tonight.mp3\"},{\"name\":\"All I have\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Jennifer%20Lopez%20and%20LL%20Cool%20J%20-%20All%20I%20have.mp3\"}]'),
+(20, 'Justin Timberlake', 'http://netstorage.metrolyrics.com/albums/1376539693jt2020-pt2.jpg', '[{\"name\":\"Cry me a River  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Justin%20Timberlake%20-%20Cry%20me%20a%20River%20%28original%29.mp3\"},{\"name\":\"Electric Lady  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Justin%20Timberlake%20-%20Electric%20Lady.mp3\"},{\"name\":\"My Love \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Justin%20Timberlake%20-%20My%20Love%20%28Dr.%20Freschs%20Hashtag%20Remix%29.mp3\"},{\"name\":\"Not a Bad Thing\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Justin%20Timberlake%20-%20Not%20a%20Bad%20Thing%20%28Radio%20Edit%29.mp3\"},{\"name\":\"Rock Your Body  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Justin%20Timberlake%20-%20Rock%20Your%20Body.mp3\"},{\"name\":\"SexyBack\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Justin%20Timberlake%20-%20SexyBack%20%28Color%20K.%20Remix%29.mp3\"},{\"name\":\"That Girl  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Justin%20Timberlake%20-%20That%20Girl.mp3\"}]'),
+(21, 'Katy Perry', 'http://www.gossip-for-girls.com/wp-content/uploads/2013/09/Katy-Perry-partofme-300x300.png', '[{\"name\":\"Birthday  \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Katy%20Perry%20-%20Birthday.mp3\"},{\"name\":\"Last Friday Night\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Katy%20Perry%20-%20Last%20Friday%20Night.mp3\"},{\"name\":\"Dark Horse\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Katy%20Perry%20-%20Dark%20Horse.mp3\"},{\"name\":\"Firework \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Katy%20Perry%20-%20Firework.mp3\"},{\"name\":\"Kiss me \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Katy%20Perry%20-%20Kiss%20me.mp3\"},{\"name\":\"ROAR \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/Katy%20Perry%20-%20ROAR.mp3\"}]'),
+(22, 'One Direction', 'https://www.fuse.tv/image/5643b311b383daf93a000094/816/545/undefined.jpg', '[{\"name\":\"Act My Age\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Act%20My%20Age.mp3\"},{\"name\":\"Best Song Ever \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Best%20Song%20Ever.mp3\"},{\"name\":\"Drag Me Down\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Drag%20Me%20Down.mp3\"},{\"name\":\"Happily\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Happily.mp3\"},{\"name\":\"Heart Attack\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Heart%20Attack.mp3\"},{\"name\":\"Midnight Memories \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Midnight%20Memories.mp3\"},{\"name\":\"No Control\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20No%20Control.mp3\"},{\"name\":\"Perfect \",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Perfect.mp3\"},{\"name\":\"Right Now\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Right%20Now.mp3\"},{\"name\":\"Spaces\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Spaces.mp3\"},{\"name\":\"Stockholm Syndrome\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Stockholm%20Syndrome.mp3\"},{\"name\":\"Truly, Madly, Deeply\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20Truly%2C%20Madly%2C%20Deeply.mp3\"},{\"name\":\"What Makes You Beautiful\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20What%20Makes%20You%20Beautiful.mp3\"},{\"name\":\"You And I\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20You%20And%20I.mp3\"},{\"name\":\"Infinity\",\"url\":\"http:\\/\\/the-sinner.net\\/download\\/music\\/%D1%8C%D0%B3%D1%8B%D1%88%D1%81\\/One%20Direction%20-%20%5BMade%20in%20the%20A.%20M.%5D%20-%20Infinity.mp3\"}]');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `playlists`
+--
+ALTER TABLE `playlists`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `playlists`
+--
+ALTER TABLE `playlists`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

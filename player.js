@@ -18,22 +18,28 @@ $( document ).ready(function() {
         $(this).hide();
         pause.show();
         timeCounter = setInterval(trackTimer,500);
-        var img = $('.left .playlist-image');
+        let img = $('.left .playlist-image');
         img.hasClass('paused') ? img.toggleClass('paused'): null;
         const duration = new Promise((resolve, reject) => {
-            if (isNaN(song.duration)) {
+            let durationIntrvl;
+            if (!isNaN(song.duration)) {
                 resolve(song.duration);
             } else {
-                reject(
-                    setTimeout(()=>{
-                        resolve(song.duration)
-                    },500)
-                )
+                durationIntrvl = setInterval((i=0)=>{
+                    if (!isNaN(song.duration)) {
+                        resolve(song.duration);
+                        window.clearInterval(durationIntrvl);
+                        songTime.html( fixSongTime(song.duration));
+                    };
+                    i++;
+                    if(i === 10) {
+                        window.clearInterval(durationIntrvl);
+                        reject(console.log('error'));
+                    }
+                },500)
             }
         });
-        duration.then(songTime.html( fixSongTime(song.duration)));
-
-        debugger;
+        duration.then(!isNaN(song.duration) ? songTime.html( fixSongTime(song.duration)) : '00-00');
     });
     pause.click(function(){
         $(this).hide();
@@ -66,6 +72,11 @@ $( document ).ready(function() {
             songCurrentTime.html('00:00');
             progressBar.css('width',0);
             pause.trigger('click');
+            const nextIndex = Number($(song).attr('data-index'))+1;
+            const nextSongLink = $('.right ol li[data-index="'+nextIndex+'"]').attr('data-link');
+            $(song).attr('src',nextSongLink)
+                .attr('data-index',nextIndex);
+            play.trigger('click');
         } else {
             songCurrentTime.html(fixSongTime(song.currentTime));
             let width = song.currentTime / song.duration;

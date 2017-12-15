@@ -34,7 +34,9 @@ $( document ).ready(function() {
                     },300);
                 };
                 $('ol.song-list-sheet li').click(function () {
-                    $('#player').attr('src',$(this).attr('data-link'));
+                    $('#pause').trigger('click');
+                    $('#player').attr('src',$(this).attr('data-link'))
+                        .attr('data-index',$(this).attr('data-index'));;
                     const list = $(this).closest('.playlist').find('ol').clone();
                     const img = $(this).closest('.playlist').find('.playlist-image:first').clone().addClass('paused');
                     if (img.attr('src') === $('.left .playlist-image').attr('src') ) {
@@ -50,7 +52,13 @@ $( document ).ready(function() {
                             },1200);
                         },600)
                     }
-
+                    $('.right ol li').click(function () {
+                        $('#player').attr('src',$(this).attr('data-link'))
+                            .attr('data-index',$(this).attr('data-index'));
+                        $('#play').trigger('click');
+                        const angle = $(this).index()+15;
+                        $('.needle').css('transform','rotate('+angle+'deg)')
+                    });
                 });
             });
             $('.playlist i.delete').click(function(){
@@ -82,12 +90,15 @@ $( document ).ready(function() {
             });
 
             $('.play').click(function () {
+                $('.needle').removeAttr('style');
                 $('#pause').trigger('click');
                 $('.needle').toggleClass('active');
                 const list = $(this).closest('.playlist').find('ol').clone();
                 const img = $(this).closest('.playlist').find('.playlist-image:first').clone().addClass('paused');
                 $('div.right').html(list);
-                $('#player').attr('src',$(this).closest('.playlist').find('ol li:first').attr('data-link'));
+                const songItem = $(this).closest('.playlist').find('ol li:first');
+                $('#player').attr('src',songItem.attr('data-link'))
+                    .attr('data-index',songItem.attr('data-index'));
                 setTimeout(()=>{
                     $('.needle').toggleClass('active');
                     $('div.left').html(img);
@@ -96,10 +107,14 @@ $( document ).ready(function() {
                     },1200);
                 },600)
                 $('.mid h1').html($(this).closest('.playlist').find('ol li:first').text())
-
+                list.find('li').off('click');
+                    $('#pause').trigger('click');
                     $('.right ol li').click(function () {
-                        $('#player').attr('src',$(this).attr('data-link'));
+                        $('#player').attr('src',$(this).attr('data-link'))
+                            .attr('data-index',$(this).attr('data-index'));
                         $('#play').trigger('click');
+                        const angle = $(this).index()+15;
+                        $('.needle').css('transform','rotate('+angle+'deg)')
                     });
                 });
         })
@@ -212,7 +227,7 @@ class Playlist {
 
         $.get('./api/playlist/'+this.id+'/songs',function (result) {
             result.data.songs.forEach(function (item, index) {
-                songsList.find('.song-list-sheet').append('<li data-link="'+item.url+'">'+item.name+'</li>');
+                songsList.find('.song-list-sheet').append('<li data-link="'+item.url+'" data-index="'+(1+index)+'">'+item.name+'</li>');
             });
         })
     }
