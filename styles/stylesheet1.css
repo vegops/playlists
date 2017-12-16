@@ -412,7 +412,7 @@ input[type=range]::-ms-thumb {
     width: 200px;
     transition: 800ms ease-in-out;
     z-index: 2;
-    transform: rotate(15deg);
+    transform: rotate(5deg);
 }
 .needle.active {
     transform: rotate(-60deg);
