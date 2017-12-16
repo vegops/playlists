@@ -6,13 +6,18 @@
         bottom: 10px;
         left: calc((100% - 600px)/2);
         right: calc((100% - 600px)/2);
+        height: 165px;
     }
     #vynl {
         left: 30px;
+        width: 140px;
+        height: 140px;
     }
     .left .playlist-image {
-        left: 40px;
-        top: -5px;
+        width: 130px;
+        height: 130px;
+        top: -10px;
+        left: 35px;
         position: absolute;
     }
     .needle {
@@ -20,7 +25,10 @@
     }
     .container {
         overflow: auto;
-        bottom: 220px;
+        bottom: 190px;
+    }
+    .right ol {
+        max-height: 140px;
     }
 }
 
@@ -108,9 +116,12 @@
     }
     .right {
         float: right;
+        max-width: 65%;
     }
     .right ol {
         max-height: 180px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     .mid {
         position: absolute;

@@ -254,7 +254,7 @@ ol.song-list-sheet li:hover {
     width: 850px;
     left: calc((100% - 850px)/2);
     right: calc((100% - 850px)/2);
-    bottom: 10%;
+    bottom: 5%;
     margin: 0;
     background: rgba(102,51,153,0.2);
     padding: 10px 0;
@@ -399,6 +399,8 @@ input[type=range]::-ms-thumb {
     height: 160px;
     margin-top: 10px;
     animation: 7s linear rotation infinite;
+    left: 64px;
+    position: absolute;
 }
 .needle {
     position: absolute;
