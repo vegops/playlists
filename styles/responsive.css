@@ -2,14 +2,75 @@
     /* start of large tablet styles */
     .bgcontainer {
         padding: 15px 0;
-        height: 80px;
-        bottom: 20px;
+        width: 600px;
+        bottom: 10px;
+        left: calc((100% - 600px)/2);
+        right: calc((100% - 600px)/2);
+    }
+    #vynl {
+        left: 30px;
+    }
+    .left .playlist-image {
+        left: 40px;
+        top: -5px;
+        position: absolute;
+    }
+    .needle {
+        width: 180px;
+    }
+    .container {
+        overflow: auto;
+        bottom: 220px;
     }
 }
 
 @media screen and (max-width: 767px) {
     /* start of medium tablet styles */
-
+    .container {
+        bottom: 145px;
+    }
+    .bgcontainer {
+        padding: 10px 0;
+        width: 500px;
+        bottom: 10px;
+        left: calc((100% - 500px)/2);
+        right: calc((100% - 500px)/2);
+        height: 120px;
+        overflow: hidden;
+    }
+    .left {
+        max-width: 20%;
+    }
+    .right {
+        max-width: 45%;
+    }
+    .right ol {
+        max-height: 110px;
+        overflow: auto;
+    }
+    #vynl {
+        left: 15px;
+        width: 100px;
+        height: 100px;
+    }
+    .left .playlist-image {
+        width: 90px;
+        height: 90px;
+        top: -5px;
+        left: 20px;
+        position: absolute;
+    }
+    .needle {
+        width: 100px;
+        left: -25px;
+        top: -20px;
+    }
+    .mid span i.fa {
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+        font-size: 16px;
+    }
 }
 
 @media screen and (max-width: 520px) {
@@ -18,16 +79,62 @@
         overflow: hidden;
     }
     .container{
-        bottom: 130px;
         overflow-y: auto;
         min-width: 220px;
+        bottom: 220px;
     }
     .bgcontainer {
         bottom: 10px;
         padding: 0px;
-        width: 80%;
-        left: 10%;
-        right: 10%;
+        width: 360px;
+        left: calc((100% - 360px)/2);
+        right: calc((100% - 360px)/2);
+        height: 200px;
+    }
+    #vynl {
+        width: 100px;
+        height: 100px;
+    }
+    .left .playlist-image {
+        width: 90px;
+        height: 90px;
+        top: 5px;
+        left: 20px;
+    }
+    .needle {
+        width: 100px;
+        left: -25px;
+        top: -20px;
+    }
+    .right {
+        float: right;
+    }
+    .right ol {
+        max-height: 180px;
+    }
+    .mid {
+        position: absolute;
+        bottom: 0;
+        margin-left: 13px;
+        padding: 0;
+    }
+    .mid span i.fa {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        padding: 3px;
     }
 
+}
+@media screen and (max-width: 380px) {
+    .bgcontainer {
+        bottom: 10px;
+        padding: 0px;
+        width: 300px;
+        left: calc((100% - 300px)/2);
+        right: calc((100% - 300px)/2);
+    }
+    .mid .times {
+        font-size: 10px;
+    }
 }
