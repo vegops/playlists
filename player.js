@@ -30,6 +30,8 @@ $( document ).ready(function() {
                         resolve(song.duration);
                         window.clearInterval(durationIntrvl);
                         songTime.html( fixSongTime(song.duration));
+                    } else {
+                        songTime.html( '00-00' );
                     };
                     i++;
                     if(i === 10) {
@@ -86,11 +88,16 @@ $( document ).ready(function() {
 
     
     function fixSongTime(number) {
-        let min = (number/60).toFixed(0);
-        let sec = (number%60).toFixed(0);
-        min < 10 ? min = `0 ${min}` : min;
-        sec < 10 ? sec = `0 ${sec}` : sec;
-        return `${min} : ${sec}`;
+        if ( isNaN(number) ) {
+            return '00-00';
+        }   else
+        {
+            let min = (number / 60).toFixed(0);
+            let sec = (number % 60).toFixed(0);
+            min < 10 ? min = `0 ${min}` : min;
+            sec < 10 ? sec = `0 ${sec}` : sec;
+            return `${min} : ${sec}`;
+        }
     }
     function volumeValue() {
         volume = $('#player').prop('volume');

@@ -56,8 +56,12 @@ $( document ).ready(function() {
                         $('#player').attr('src',$(this).attr('data-link'))
                             .attr('data-index',$(this).attr('data-index'));
                         $('#play').trigger('click');
-                        const angle = $(this).index()+15;
-                        $('.needle').css('transform','rotate('+angle+'deg)')
+                        $('.needle').toggleClass('needle-up');
+                        setTimeout(()=>{
+                            const angle = $(this).index()+5;
+                            $('.needle').toggleClass('needle-up');
+                            $('.needle').css('transform','rotate('+angle+'deg)')
+                        },400);
                     });
                 });
             });
@@ -106,15 +110,19 @@ $( document ).ready(function() {
                         $('#play').trigger('click');
                     },1200);
                 },600)
-                $('.mid h1').html($(this).closest('.playlist').find('ol li:first').text())
+                $('.mid h5').html($(this).closest('.playlist').find('ol li:first').text())
                 list.find('li').off('click');
                     $('#pause').trigger('click');
                     $('.right ol li').click(function () {
                         $('#player').attr('src',$(this).attr('data-link'))
                             .attr('data-index',$(this).attr('data-index'));
                         $('#play').trigger('click');
-                        const angle = $(this).index()+15;
-                        $('.needle').css('transform','rotate('+angle+'deg)')
+                        $('.needle').toggleClass('needle-up');
+                        setTimeout(()=>{
+                            const angle = $(this).index()+5;
+                            $('.needle').toggleClass('needle-up');
+                            $('.needle').css('transform','rotate('+angle+'deg)')
+                        },400);
                     });
                 });
         })

@@ -46,10 +46,13 @@ i.fa {
     left: 10%;
     right: 10%;
     top: 50px;
+    bottom: 240px;
     background: black;
     border-radius: 5px;
     box-shadow: 0 0 15px 2px #FFF;
     min-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .container button.add-playlist {
     background: no-repeat;
@@ -254,7 +257,7 @@ ol.song-list-sheet li:hover {
     width: 850px;
     left: calc((100% - 850px)/2);
     right: calc((100% - 850px)/2);
-    bottom: 5%;
+    bottom: 20px;
     margin: 0;
     background: rgba(102,51,153,0.2);
     padding: 10px 0;
@@ -387,8 +390,8 @@ input[type=range]::-ms-thumb {
     height: 4px;
     width: 90%;
 }
-.right {
-
+.mid {
+    padding: 30px;
 }
 .right ol {
     max-height: 180px;
@@ -442,6 +445,9 @@ input[type=range]::-ms-thumb {
 #vynl .inner:hover {
     background: #000;
     color: #4518a0;
+}
+.needle-up {
+    transform: rotateY(50deg) rotateZ(15deg) !important;
 }
 /*----------------END of player style------------------*/
 /*----------------START of form style------------------*/

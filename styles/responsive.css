@@ -24,11 +24,14 @@
         width: 180px;
     }
     .container {
-        overflow: auto;
+        overflow-y: auto;
         bottom: 190px;
     }
     .right ol {
         max-height: 140px;
+    }
+    .mid {
+        padding: 15px;
     }
 }
 
@@ -44,7 +47,7 @@
         left: calc((100% - 500px)/2);
         right: calc((100% - 500px)/2);
         height: 120px;
-        overflow: hidden;
+        overflow-y: hidden;
     }
     .left {
         max-width: 20%;
@@ -72,6 +75,9 @@
         width: 100px;
         left: -25px;
         top: -20px;
+    }
+    .mid {
+        padding: 0px 15px;
     }
     .mid span i.fa {
         width: 30px;
