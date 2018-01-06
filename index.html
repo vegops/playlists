@@ -35,8 +35,14 @@
 <object type="text/html" data="background.html"></object>
     <container class="container">
         <button class="add-playlist"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+        <button class="search-playlist"><i class="fa fa-search" aria-hidden="true"></i></button>
         <div id="album-list"></div>
     </container>
+    <form action="#">
+        <label for="search">Search: </label>
+        <input id="search" type="text">
+        <input type="submit" value="Go">
+    </form>
     <div class="ui-widget-content bgcontainer row">
         <img src="./images/music.png" alt="" class="needle">
         <div id="vynl"><i class="fa fa-circle inner" aria-hidden="true"></i></div>
@@ -72,6 +78,42 @@
     <div id="new" class="form-block">
         <div class="new-playlist">
             <h3>Add New Playlist</h3>
+            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-music" aria-hidden="true"></i>
+            <div class="new-list-name">
+                <label for="name">List Name: </label>
+                <input name="name" type="text" id="name" placeholder=" type playlist name here" required>
+                <span class="error">Name must be less then 20 characters</span>
+            </div>
+            <div class="new-list-img">
+                <label for="image">List Image: </label>
+                <input name="image" type="url" id="image" placeholder=" type image URL here" required>
+                <span class="error">Image has to be a valid URL address</span>
+            </div>
+            <form id="new-list-songs">
+                <div class="new-list-songs">
+                    <h4>List Songs</h4>
+                    <div id="song-box" class="song">
+                        <span class="song-field">
+                            <label> Name: </label>
+                            <input name="song" type="text" placeholder=" Song Name" required>
+                        </span>
+                        <span class="song-field">
+                            <label> URL: </label>
+                            <input name="link" type="url" placeholder=" Song URL" required>
+                        </span>
+                    </div>
+                </div>
+            <div>
+                <input type="button" id="add-song" class="submit" value="Add Song">
+                <input type="submit" class="submit" value="Submit List">
+            </div>
+            </form>
+        </div>
+    </div>
+    <div id="update" class="form-block">
+        <div class="new-playlist">
+            <h3>Update Playlist</h3>
             <i class="fa fa-times" aria-hidden="true"></i>
             <i class="fa fa-music" aria-hidden="true"></i>
             <div class="new-list-name">

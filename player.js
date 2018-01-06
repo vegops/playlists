@@ -74,11 +74,7 @@ $( document ).ready(function() {
             songCurrentTime.html('00:00');
             progressBar.css('width',0);
             pause.trigger('click');
-            const nextIndex = Number($(song).attr('data-index'))+1;
-            const nextSongLink = $('.right ol li[data-index="'+nextIndex+'"]').attr('data-link');
-            $(song).attr('src',nextSongLink)
-                .attr('data-index',nextIndex);
-            play.trigger('click');
+            nextSong(song);
         } else {
             songCurrentTime.html(fixSongTime(song.currentTime));
             let width = song.currentTime / song.duration;
@@ -117,6 +113,14 @@ $( document ).ready(function() {
         $('.current-vol').css('width',volume*100+'%');
         $('#current-vol').val(volume*100);
     };
+
+    function nextSong (song) {
+        const nextIndex = Number($(song).attr('data-index'))+1;
+        const nextSongLink = $('.right ol li[data-index="'+nextIndex+'"]').attr('data-link');
+        $(song).attr('src',nextSongLink)
+            .attr('data-index',nextIndex);
+        play.trigger('click');
+    }
     volumeValue();
 
 });

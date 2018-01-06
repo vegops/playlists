@@ -47,12 +47,12 @@ i.fa {
     right: 10%;
     top: 50px;
     bottom: 240px;
-    background: black;
-    border-radius: 5px;
-    box-shadow: 0 0 15px 2px #FFF;
+    background: rgba(10, 3, 23, 0.7);
+    border-radius: 30px;
     min-height: 100px;
     overflow-y: auto;
     overflow-x: hidden;
+    border: inset 10px #130419;
 }
 .container button.add-playlist {
     background: no-repeat;
@@ -61,6 +61,15 @@ i.fa {
     font-size: 20px;
     position: absolute;
     left: 0;
+    padding: 5px;
+}
+.container button.search-playlist {
+    background: no-repeat;
+    border: none;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    right: 0;
     padding: 5px;
 }
 .playlist {
@@ -319,6 +328,7 @@ nav.vol-bar {
 }
 input[type=range] {
     -webkit-appearance: none;
+    -moz-appearance: none;
     width: 100%;
 }
 input[type=range]:focus {
@@ -392,6 +402,7 @@ input[type=range]::-ms-thumb {
 }
 .mid {
     padding: 30px;
+    z-index: 2;
 }
 .right ol {
     max-height: 180px;
@@ -526,7 +537,7 @@ input[type=range]::-ms-thumb {
 .forms > div > form .new-list-songs {
     margin-top: 10px;
 }
-.forms > div#new {
+.forms > div#new, #update {
     display: none;
 }
 .forms > div form#new-list-songs .song {

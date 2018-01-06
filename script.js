@@ -14,7 +14,7 @@ $( document ).ready(function() {
 
             if($('#album-list').html() ==="") { $('#album-list').html('<div class="empty-list">it\'s quite boring here, try adding a playlist!</div>') }
 
-            $('.playlist-image').click(function () {
+            $('.playlist-image').click(function () { //show song list in album
                 const playlist =  $(this).closest('.playlist');
                 const songList = playlist.find('.songs-list');
                 playlist.toggleClass('opened');
@@ -33,15 +33,15 @@ $( document ).ready(function() {
                         songList.css('height',height);
                     },300);
                 };
-                $('ol.song-list-sheet li').click(function () {
+                $('ol.song-list-sheet li').click(function () { //adding click event (play song and append list to player list) for songs in the list
                     $('#pause').trigger('click');
                     $('#player').attr('src',$(this).attr('data-link'))
                         .attr('data-index',$(this).attr('data-index'));;
                     const list = $(this).closest('.playlist').find('ol').clone();
                     const img = $(this).closest('.playlist').find('.playlist-image:first').clone().addClass('paused');
-                    if (img.attr('src') === $('.left .playlist-image').attr('src') ) {
+                    if (img.attr('src') === $('.left .playlist-image').attr('src') ) { // checks if player img is same as album img
                         $('#play').trigger('click');
-                    } else {
+                    } else { // if player img is not same as album img - replaces to new img
                         $('div.right').html(list);
                         $('.needle').toggleClass('active');
                         setTimeout(()=>{
@@ -52,7 +52,7 @@ $( document ).ready(function() {
                             },1200);
                         },600)
                     }
-                    $('.right ol li').click(function () {
+                    $('.right ol li').click(function () { // adds click event to appended list in player
                         $('#player').attr('src',$(this).attr('data-link'))
                             .attr('data-index',$(this).attr('data-index'));
                         $('#play').trigger('click');
@@ -65,14 +65,14 @@ $( document ).ready(function() {
                     });
                 });
             });
-            $('.playlist i.delete').click(function(){
+            $('.playlist i.delete').click(function(){ // delete playlist
                 const playlist = $(this).closest('.playlist');
                 if( playlist.hasClass('opened') ) { playlist.find('.playlist-image')[0].click(true); };
                 $(this).closest('.playlist').css('transform','rotateY(180deg)');
                 $(this).closest('.playlist').find('.playlist-del').fadeIn();
 
             });
-            $('.playlist .confirm-del').click(function () {
+            $('.playlist .confirm-del').click(function () { // confirm before playlist delete
                 const id = $(this).closest('.playlist').attr('data-id');
                 $.delete('./api/playlist/'+id,function (result) {
                     console.log(result);
@@ -88,12 +88,12 @@ $( document ).ready(function() {
                     )});
             });
 
-            $('.playlist .cancel-del').click(function () {
+            $('.playlist .cancel-del').click(function () { // cancel playlist delete on confirm box
                 $(this).closest('.playlist').find('.playlist-del').fadeOut();
                 $(this).closest('.playlist').css('transform','rotateY(0deg)');
             });
 
-            $('.play').click(function () {
+            $('.play').click(function () { // play playlist and append list and img to player
                 $('.needle').removeAttr('style');
                 $('#pause').trigger('click');
                 $('.needle').toggleClass('active');
@@ -125,10 +125,13 @@ $( document ).ready(function() {
                         },400);
                     });
                 });
+                $('.playlist-player .edit').click(function () {
+                    $('#update').slideDown();
+                });
         })
     };
-    getAlbums();
-    $('.bgcontainer').draggable();
+    getAlbums(); // retrives all albums
+    $('.bgcontainer').draggable(); // make player draggable
 
     $('.add-playlist').click(function () {
         $('#new').slideDown();
@@ -140,7 +143,7 @@ $( document ).ready(function() {
         $(this).css('background','#130419');
     })
     
-    $('#add-song').click(function () {
+    $('#add-song').click(function () { // add song input to new playlist form
         const song = $('#song-box').clone();
         $('.new-list-songs').append(song.hide());
         song.append('<i class="fa fa-trash song-remove" aria-hidden="true"></i>\n')
@@ -151,7 +154,7 @@ $( document ).ready(function() {
         });
     })
     
-    $('#new div.new-playlist').submit(function(e) {
+    $('#new div.new-playlist').submit(function(e) { // new playlist form submit action
         e.preventDefault();
         let reqFlag = 1;
         let listName = $('#new .new-playlist #name');
@@ -195,6 +198,17 @@ $( document ).ready(function() {
             ) ;
     });
 
+    $('#update .new-playlist').submit(function(){
+
+    });
+
+    $('.forms').click(function(){
+        $(this).find('.form-block').slideUp();
+    });
+    $('.new-playlist').click(function(e){
+        e.stopPropagation();
+    });
+
 });
 
 class Playlist {
@@ -233,7 +247,7 @@ class Playlist {
         $('#album-list').append(playlist.append(finalLabel, image, player, songsList, delBox));
         allPlaylists.push({id: this.id, name: this.name});
 
-        $.get('./api/playlist/'+this.id+'/songs',function (result) {
+        $.get('./api/playlist/'+this.id+'/songs',function (result) { // retrives song list for each playlist
             result.data.songs.forEach(function (item, index) {
                 songsList.find('.song-list-sheet').append('<li data-link="'+item.url+'" data-index="'+(1+index)+'">'+item.name+'</li>');
             });
