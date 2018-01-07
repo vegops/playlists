@@ -1,4 +1,5 @@
 "use strict";
+
 const allPlaylists = [];
 $( document ).ready(function() {
     console.log( "ready!" );
@@ -9,7 +10,9 @@ $( document ).ready(function() {
             var albums = result['data'];
             $.each(albums, function (i, e) {
                 var list = new Playlist(this['id'], this['name'], this['image']);
-                list.build();
+                let playlist = list.build(1);
+                // filter(playlist);
+                playlist != 0 ? $('#album-list').append(playlist): null;
             });
 
             if($('#album-list').html() ==="") { $('#album-list').html('<div class="empty-list">it\'s quite boring here, try adding a playlist!</div>') }
@@ -208,7 +211,14 @@ $( document ).ready(function() {
     $('.new-playlist').click(function(e){
         e.stopPropagation();
     });
+    $('.search-playlist').click(function(){
+        $('.search-form').slideToggle();
+    })
 
+    // filter albums
+    $('#search').keyup(function(e){
+
+    })
 });
 
 class Playlist {
@@ -221,7 +231,7 @@ class Playlist {
     get() {
         return  this.name, this.image
     }
-    build() {
+    build(push) {
         const playlist = $('<div>').addClass('playlist').attr('data-id',this.id);
         const finalLabel = $('<div>').addClass('playlist-name').attr('data',this.name);
         const label = this.name.toLowerCase().split("");
@@ -244,15 +254,19 @@ class Playlist {
         const play = '<i class="fa fa-play-circle play" aria-hidden="true"></i>';
 
         player.addClass('playlist-player').append(del, edit, play);
-        $('#album-list').append(playlist.append(finalLabel, image, player, songsList, delBox));
-        allPlaylists.push({id: this.id, name: this.name});
+        playlist.append(finalLabel, image, player, songsList, delBox);
 
-        $.get('./api/playlist/'+this.id+'/songs',function (result) { // retrives song list for each playlist
+        $.get('./api/playlist/'+this.id+'/songs', result => { // retrives song list for each playlist
             result.data.songs.forEach(function (item, index) {
                 songsList.find('.song-list-sheet').append('<li data-link="'+item.url+'" data-index="'+(1+index)+'">'+item.name+'</li>');
             });
-        })
-    }
+            if (push === 1) {
+                console.log('pushing');
+                allPlaylists.push({id: this.id, name: this.name, image: this.image, songs: result.data.songs });
+            }
+        });
+        return playlist;
+    };
 
 }
 $.each( [ "put", "delete" ], function( i, method ) {

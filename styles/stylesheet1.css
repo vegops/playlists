@@ -584,6 +584,39 @@ ol.song-list-sheet::-webkit-scrollbar-thumb
     color-stop(0.86, #CFB2C6));
 }
 
+/* search form style */
+.search-form {
+    position: fixed;
+    width: 100%;
+    padding: 5px 0 5px 20px;
+    background: #130419;
+    display: none;
+}
+.search-form label {
+    margin: 0 20px;
+    font-size: 20px;
+    color: white;
+}
+.search-form #search {
+    border-radius: 3px;
+    border: none;
+    padding: 3PX;
+}
+.search-form .search-submit {
+    margin: 0 20px;
+    border-radius: 50%;
+    background: #4518a0;
+    color: white;
+    border: 2px solid #4518a0;
+    transition: 300ms ease;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+}
+.search-form .search-submit:hover {
+    background: #9923c7; 
+    border: 2px solid #4518a0;
+}
 
 @keyframes rotation {
     from {transform: rotate(0deg)}

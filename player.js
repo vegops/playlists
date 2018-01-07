@@ -15,6 +15,17 @@ $( document ).ready(function() {
     let progressBar = $('#progress-bar');
 
     play.click(function(n){
+        var playPromise = song.play();
+
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {
+            console.log('song is playing');
+          })
+          .catch(error => {
+            pause.trigger('click');
+            console.log('song promise failed')
+          });
+        }
         $(this).hide();
         pause.show();
         timeCounter = setInterval(trackTimer,500);
@@ -44,6 +55,7 @@ $( document ).ready(function() {
         duration.then(!isNaN(song.duration) ? songTime.html( fixSongTime(song.duration)) : '00-00');
     });
     pause.click(function(){
+        song.pause();
         $(this).hide();
         play.show();
         window.clearInterval(timeCounter);
