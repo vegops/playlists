@@ -4,14 +4,14 @@ const allPlaylists = [];
 $( document ).ready(function() {
     console.log( "ready!" );
 
-    const getAlbums = () => {
+    const getAlbums = (searchBy = "") => {
         $('#album-list').html('');
         $.get('api/playlist', function (result) {
             var albums = result['data'];
             $.each(albums, function (i, e) {
                 var list = new Playlist(this['id'], this['name'], this['image']);
-                let playlist = list.build(1);
-                // filter(playlist);
+                let playlist = list.build();
+                playlist = searchBy="" ? playlist : searchFilter(playlist, searchBy);
                 playlist != 0 ? $('#album-list').append(playlist): null;
             });
 
@@ -218,7 +218,12 @@ $( document ).ready(function() {
     // filter albums
     $('#search').keyup(function(e){
 
-    })
+    });
+
+    function searchFilter(playlist, searchBy) {
+        console.log(playlist);
+        return playlist;
+    }
 });
 
 class Playlist {
@@ -260,10 +265,7 @@ class Playlist {
             result.data.songs.forEach(function (item, index) {
                 songsList.find('.song-list-sheet').append('<li data-link="'+item.url+'" data-index="'+(1+index)+'">'+item.name+'</li>');
             });
-            if (push === 1) {
-                console.log('pushing');
-                allPlaylists.push({id: this.id, name: this.name, image: this.image, songs: result.data.songs });
-            }
+            allPlaylists.push({id: this.id, name: this.name, image: this.image, songs: result.data.songs });
         });
         return playlist;
     };
