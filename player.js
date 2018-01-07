@@ -14,7 +14,7 @@ $( document ).ready(function() {
     let timeCounter;
     let progressBar = $('#progress-bar');
 
-    play.click(function(n){
+    play.click(function(){
         var playPromise = song.play();
 
         if (playPromise !== undefined) {
@@ -23,7 +23,7 @@ $( document ).ready(function() {
           })
           .catch(error => {
             pause.trigger('click');
-            console.log('song promise failed')
+            console.log('song promise failed=> '+error)
           });
         }
         $(this).hide();
@@ -52,6 +52,9 @@ $( document ).ready(function() {
                 },500)
             }
         });
+        const nextIndex = Number($(song).attr('data-index'));
+        $('.right ol li').removeClass('playing');
+        $('.right ol li[data-index="'+nextIndex+'"]').addClass('playing');
         duration.then(!isNaN(song.duration) ? songTime.html( fixSongTime(song.duration)) : '00-00');
     });
     pause.click(function(){
@@ -86,7 +89,7 @@ $( document ).ready(function() {
             songCurrentTime.html('00:00');
             progressBar.css('width',0);
             pause.trigger('click');
-            nextSong(song);
+            playSong(song, "next");
         } else {
             songCurrentTime.html(fixSongTime(song.currentTime));
             let width = song.currentTime / song.duration;
@@ -109,7 +112,7 @@ $( document ).ready(function() {
     }
     function volumeValue() {
         volume = $('#player').prop('volume');
-        if (volume >= 1) {
+        if (volume >= 0.99) {
             volUp.hide();
             volNn.show();
             volDn.show();
@@ -120,19 +123,28 @@ $( document ).ready(function() {
         } else {
             volUp.show();
             volDn.show();
-            volNn.hide();
+            // volNn.hide();
         }
         $('.current-vol').css('width',volume*100+'%');
         $('#current-vol').val(volume*100);
     };
 
-    function nextSong (song) {
-        const nextIndex = Number($(song).attr('data-index'))+1;
+    function playSong (song, action) { // playing next / previous song based on action argument 
+        action = "next" ? 1 : -1 ;
+        const nextIndex = Number($(song).attr('data-index'))+action;
         const nextSongLink = $('.right ol li[data-index="'+nextIndex+'"]').attr('data-link');
-        $(song).attr('src',nextSongLink)
-            .attr('data-index',nextIndex);
-        play.trigger('click');
-    }
+        if (nextIndex > $('.right .song-list-sheet li').length) { 
+            window.clearInterval(timeCounter);
+            console.log('list ended');
+        } else if (nextIndex < 0) {
+            window.clearInterval(timeCounter);
+            console.log('this is the first song');
+        } else { // pause playing if this was the last song
+            $(song).attr('src',nextSongLink)
+                .attr('data-index',nextIndex);
+            play.trigger('click');
+        }
+    };
     volumeValue();
 
 });

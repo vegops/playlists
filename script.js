@@ -4,15 +4,17 @@ const allPlaylists = [];
 $( document ).ready(function() {
     console.log( "ready!" );
 
-    const getAlbums = (searchBy = "") => {
+    const getAlbums = ({isFirst, searchBy}) => {
         $('#album-list').html('');
         $.get('api/playlist', function (result) {
-            var albums = result['data'];
-            $.each(albums, function (i, e) {
-                var list = new Playlist(this['id'], this['name'], this['image']);
-                let playlist = list.build();
-                playlist = searchBy="" ? playlist : searchFilter(playlist, searchBy);
-                playlist != 0 ? $('#album-list').append(playlist): null;
+            let albums = result['data'];
+            let filteredAlbums = searchBy ? albums.filter(album=> {
+                return album.name.toLowerCase().includes(searchBy.toLowerCase()) ? album : null;
+            }) : albums;
+            $.each(filteredAlbums, function (i, e) {
+                let list = new Playlist(this['id'], this['name'], this['image']);
+                let playlist = list.build(isFirst);
+                $('#album-list').append(playlist);
             });
 
             if($('#album-list').html() ==="") { $('#album-list').html('<div class="empty-list">it\'s quite boring here, try adding a playlist!</div>') }
@@ -82,7 +84,7 @@ $( document ).ready(function() {
                 })
                     .success(()=>{
                         swal('Done!','Your playlist was deleted!','success');
-                        getAlbums();
+                        getAlbums({isFirst: 'yes'});
                     })
                     .fail(()=>{swal(
                         'Oops...',
@@ -133,7 +135,7 @@ $( document ).ready(function() {
                 });
         })
     };
-    getAlbums(); // retrives all albums
+    getAlbums({isFirst: 'yes'}); // retrives all albums
     $('.bgcontainer').draggable(); // make player draggable
 
     $('.add-playlist').click(function () {
@@ -188,7 +190,7 @@ $( document ).ready(function() {
             .success(()=>{
                 swal('Done!','Your playlist was added!','success');
                 $('#new input').not('.submit').val('').closest('#new').fadeOut();
-                getAlbums();
+                getAlbums({isFirst: 'yes'});
             })
             .fail(()=>{swal(
                 'Oops...',
@@ -213,17 +215,23 @@ $( document ).ready(function() {
     });
     $('.search-playlist').click(function(){
         $('.search-form').slideToggle();
-    })
+    });
+
+    $('.new-playlist #image').change(function(){
+        let image = $(this).val();
+        $('.new-playlist-image').html('');
+        $('.new-playlist-image').append('<img src="'+image+'">').fadeIn();
+        $('.new-playlist-image img').error(function(){
+            $('.new-playlist-image').html('');
+            $('.new-playlist-image').append('<div> Can not load this image</div><i class="fa fa-chain-broken" aria-hidden="true"></i>').fadeIn();
+        })
+    });
 
     // filter albums
     $('#search').keyup(function(e){
-
+        let searchTerm = $(this).val();
+        getAlbums({isFirst: 'no', searchBy: searchTerm });
     });
-
-    function searchFilter(playlist, searchBy) {
-        console.log(playlist);
-        return playlist;
-    }
 });
 
 class Playlist {
@@ -236,7 +244,7 @@ class Playlist {
     get() {
         return  this.name, this.image
     }
-    build(push) {
+    build(isFirst) {
         const playlist = $('<div>').addClass('playlist').attr('data-id',this.id);
         const finalLabel = $('<div>').addClass('playlist-name').attr('data',this.name);
         const label = this.name.toLowerCase().split("");
@@ -265,7 +273,11 @@ class Playlist {
             result.data.songs.forEach(function (item, index) {
                 songsList.find('.song-list-sheet').append('<li data-link="'+item.url+'" data-index="'+(1+index)+'">'+item.name+'</li>');
             });
-            allPlaylists.push({id: this.id, name: this.name, image: this.image, songs: result.data.songs });
+            if (isFirst==="yes") {
+                allPlaylists.push({id: this.id, name: this.name, image: this.image, songs: result.data.songs });
+            } else {
+                console.log("not first: "+this.name);
+            }
         });
         return playlist;
     };
