@@ -1,21 +1,23 @@
+"use strict";
+window.enableContentLengthHeader = 0
 $( document ).ready(function() {
     const play = $('#play');
     const pause = $('#pause');
     const volUp = $('#vol-up');
     const volDn = $('#vol-dn');
     const volNn = $('#vol-none');
-    let song = $('#player')[0];
+    let player = $('#player')[0];
     let songTime = $('#song-total');
     let songCurrentTime = $('#song-now');
     setTimeout(()=>{
-        songTime.html(fixSongTime(song.duration));
+        songTime.html(fixSongTime(player.duration));
         },500,);
     let volume = $('#player').prop('volume',.9);
     let timeCounter;
     let progressBar = $('#progress-bar');
 
     play.click(function(){
-        var playPromise = song.play();
+        var playPromise = player.play();
 
         if (playPromise !== undefined) {
           playPromise.then(_ => {
@@ -33,32 +35,34 @@ $( document ).ready(function() {
         img.hasClass('paused') ? img.toggleClass('paused'): null;
         const duration = new Promise((resolve, reject) => {
             let durationIntrvl;
-            if (!isNaN(song.duration)) {
-                resolve(song.duration);
+            if (!isNaN(player.duration)) {
+                resolve(player.duration);
             } else {
                 durationIntrvl = setInterval((i=0)=>{
-                    if (!isNaN(song.duration)) {
-                        resolve(song.duration);
+                    if (!isNaN(player.duration)) {
+                        resolve(player.duration);
                         window.clearInterval(durationIntrvl);
-                        songTime.html( fixSongTime(song.duration));
+                        songTime.html( fixSongTime(player.duration));
                     } else {
                         songTime.html( '00-00' );
                     };
                     i++;
                     if(i === 10) {
                         window.clearInterval(durationIntrvl);
-                        // reject(console.log('error'));
+                        reject(console.log('error'));
                     }
                 },500)
             }
         });
-        const nextIndex = Number($(song).attr('data-index'));
-        $('.right ol li').removeClass('playing');
-        $('.right ol li[data-index="'+nextIndex+'"]').addClass('playing');
-        duration.then(!isNaN(song.duration) ? songTime.html( fixSongTime(song.duration)) : '00-00');
+        duration.then(function(){
+            const playingSong = $('.right ol li[data-index="'+$(player).attr('data-index')+'"]');
+            $('.right ol li').removeClass('playing');
+            playingSong.addClass('playing');
+        })
+        duration.then(!isNaN(player.duration) ? songTime.html( fixSongTime(player.duration)) : '00-00');
     });
     pause.click(function(){
-        song.pause();
+        player.pause();
         $(this).hide();
         play.show();
         window.clearInterval(timeCounter);
@@ -85,14 +89,14 @@ $( document ).ready(function() {
     }
 
     function trackTimer() {
-        if(song.ended) {
+        if(player.ended) {
             songCurrentTime.html('00:00');
             progressBar.css('width',0);
             pause.trigger('click');
-            playSong(song, "next");
+            $('#next').trigger('click');
         } else {
-            songCurrentTime.html(fixSongTime(song.currentTime));
-            let width = song.currentTime / song.duration;
+            songCurrentTime.html(fixSongTime(player.currentTime));
+            let width = player.currentTime / player.duration;
             progressBar.css('width', width * 100 + '%');
         }
     }
@@ -114,35 +118,48 @@ $( document ).ready(function() {
         volume = $('#player').prop('volume');
         if (volume >= 0.99) {
             volUp.hide();
-            volNn.show();
             volDn.show();
         }else if (volume <= 0.1 ) {
             volDn.hide();
-            volNn.show();
             volUp.show();
         } else {
             volUp.show();
             volDn.show();
-            // volNn.hide();
         }
         $('.current-vol').css('width',volume*100+'%');
         $('#current-vol').val(volume*100);
     };
 
-    function playSong (song, action) { // playing next / previous song based on action argument 
-        action = "next" ? 1 : -1 ;
-        const nextIndex = Number($(song).attr('data-index'))+action;
-        const nextSongLink = $('.right ol li[data-index="'+nextIndex+'"]').attr('data-link');
-        if (nextIndex > $('.right .song-list-sheet li').length) { 
-            window.clearInterval(timeCounter);
-            // console.log('list ended');
-        } else if (nextIndex < 0) {
-            window.clearInterval(timeCounter);
-        } else { // pause playing if this was the last song
-            $(song).attr('src',nextSongLink)
-                .attr('data-index',nextIndex);
+    $('#next').on('click',() => { playSong({
+        song: $('.right ol li[data-index="'+$(player).attr('data-index')+'"]'),
+        action: "next"
+            });
+        });
+    $('#previous').on('click',() => { playSong({
+        song: $('.right ol li[data-index="'+$(player).attr('data-index')+'"]'),
+        action: "previous"
+            });
+        });
+  
+
+    function playSong ({song, action}) { // playing next / previous song based on action argument 
+        pause.trigger('click');
+        if (song.next() && action === "next") {       
+            let nextSong = song.next();
+            $(player).attr('src', nextSong.attr('data-link'))
+                    .attr('data-index',nextSong.attr('data-index'));
             play.trigger('click');
+
+        } else if (song.prev() && action === "previous") {        
+            let prevSong = song.prev();
+            $(player).attr('src', prevSong.attr('data-link'))
+                    .attr('data-index',prevSong.attr('data-index'));
+            play.trigger('click');
+
+        } else {
+            // console.log("none=> "+action)
         }
+
     };
     volumeValue();
 

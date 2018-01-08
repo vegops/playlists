@@ -17,6 +17,14 @@ $( document ).ready(function() {
 
             if($('#album-list').html() ==="") { $('#album-list').html('<div class="empty-list">it\'s quite boring here, try adding a playlist!</div>') }
 
+            if ( $('.container')[0].scrollHeight > $('.container').height() ) {
+                console.log('scroll');
+                $('.more-playlist').fadeIn();
+                $('.more-playlist').click(()=>{
+                    $('.container').animate({ scrollTop: $('.container')[0].scrollHeight}, 1500);
+                });  
+            };
+
             $('.playlist-image').click(function () { //show song list in album
                 const playlist =  $(this).closest('.playlist');
                 const songList = playlist.find('.songs-list');
@@ -149,6 +157,7 @@ $( document ).ready(function() {
                     $('#update').slideDown();
                 });
         })
+
     };
     getAlbums({isFirst: 'yes'}); // retrives all albums
     $('.bgcontainer').draggable(); // make player draggable
@@ -158,6 +167,8 @@ $( document ).ready(function() {
     });
     $('.form-block i.fa-times').click(function(){
         $(this).closest('.form-block').slideUp();
+        $(this).closest('.form-block').find('.new-playlist-image').html('');
+        $(this).closest('.form-block').find('.song').not(':first').html('');
     })
     $('.bgcontainer').mouseup(function () {
         $(this).css('background','#130419');
@@ -247,7 +258,7 @@ $( document ).ready(function() {
     });
 
     $('#update .fa-times').click(function(){
-        $('#update .new-list-songs').html('<h4>List Songs</h4>');
+        $('#update .new-list-songs').html('');
     });
 
     $('.forms').click(function(){

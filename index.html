@@ -35,6 +35,7 @@
 <object type="text/html" data="background.html"></object>
 <button class="add-playlist"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
 <button class="search-playlist"><i class="fa fa-search" aria-hidden="true"></i></button>
+<button class="more-playlist"><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
     <container class="container">
         <div id="album-list"></div>
     </container>
@@ -51,18 +52,22 @@
         <div class="mid col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <h5>Welcome</h5>
             <audio id="player" src="http://www.ctje.nl/dl/Music/Beyonc%C3%A9/I%20Am...%20Sasha%20Fierce/02%20Halo.mp3"></audio>
-            <div>
-                <span id="play"><i class="fa fa-play" aria-hidden="true"></i></span>
-                <span id="pause" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></span>
-                <span id="vol-up" class="vol" onclick="document.getElementById('player').volume += 0.1"><i class="fa fa-volume-up" aria-hidden="true"></i></span>
-                <span id="vol-dn" class="vol" onclick="document.getElementById('player').volume -= 0.1"><i class="fa fa-volume-down" aria-hidden="true"></i></span>
-                <!-- <span id="vol-none" class="vol-none" onclick="document.getElementById('player').volume = 0" style="display:inline-block"><i class="fa fa-volume-off" aria-hidden="true"></i></span> -->
-                <div class="times"><b id="song-now">00 : 00</b> | <b id="song-total">00 : 00</b></div>
+            <div class="col-xe-12">
+                <div class="audio-btns">
+                    <span id="previous" class="col-xs-2"><i class="fa fa-step-forward previous" aria-hidden="true" style="transform: rotate(180deg);"></i></span>
+                    <span id="play" class="col-xs-2"><i class="fa fa-play" aria-hidden="true"></i></span>
+                    <span id="pause" style="display: none;" class="col-xs-2"><i class="fa fa-pause" aria-hidden="true"></i></span>
+                    <span id="next" class="col-xs-2"><i class="fa fa-step-forward next" aria-hidden="true"></i></span>
+                    <span id="vol-up" class="vol col-xs-2" onclick="document.getElementById('player').volume += 0.1"><i class="fa fa-volume-up" aria-hidden="true"></i></span>
+                    <span id="vol-dn" class="vol col-xs-2" onclick="document.getElementById('player').volume -= 0.1"><i class="fa fa-volume-down" aria-hidden="true"></i></span>
+                    <span id="vol-none" class="vol-none col-xs-2" onclick="document.getElementById('player').volume = 0"><i class="fa fa-volume-off" aria-hidden="true"></i></span>
+                </div>
+                <div class="times col-xs-12"><b id="song-now">00 : 00</b> | <b id="song-total">00 : 00</b></div>
                 <nav class="vol-bar">
                     <input type="range" id="current-vol">
                     <div class="current-vol"></div>
                 </nav>
-                <nav>
+                <nav class="col-xs-12" style="margin: 0; padding: 0;">
                     <div id="defalut-bar">
                         <div id="progress-bar"></div>
                     </div>
@@ -92,8 +97,8 @@
             </div>
             <div class="new-playlist-image"></div>
             <form id="new-list-songs">
+                <h4>List Songs</h4>
                 <div class="new-list-songs">
-                    <h4>List Songs</h4>
                     <div id="song-box" class="song">
                         <span class="song-field">
                             <label> Name: </label>
@@ -129,8 +134,8 @@
             </div>
             <div class="new-playlist-image"></div>
             <form id="new-list-songs">
+                <h4>List Songs</h4>
                 <div class="new-list-songs">
-                    <h4>List Songs</h4>
                 </div>
             <div>
                 <input type="button" id="add-song" class="submit" value="Add Song">

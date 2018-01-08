@@ -59,31 +59,35 @@ i.fa {
     overflow-x: hidden;
     border: inset 10px #130419;
 }
-button.add-playlist {
+button.add-playlist, button.search-playlist, .more-playlist {
     border: none;
     color: white;
     font-size: 20px;
     width: 4%;
     position: absolute;
-    left: 7%;
-    top: 70px;
     padding: 5px;
     background: black;
+    max-width: 60px;
+}
+button.add-playlist {
+    top: 70px;
+    left: 7%;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
 }
  button.search-playlist {
-    border: none;
-    color: white;
-    font-size: 20px;
-    width: 4%;
-    position: absolute;
-    right: 7%;
     top: 70px;
-    padding: 5px;
-    background: black;
+    right: 7%;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
+}
+ button.more-playlist {
+    top: 570px;
+    right: 7%;
+    padding: 10px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    display: none;
 }
 .playlist {
     width: 150px;
@@ -304,12 +308,16 @@ ol.song-list-sheet li:hover {
     border-radius: 50%;
 }
 .bgcontainer span i.fa {
-    padding: 10px;
+    padding: 5px;
     color: white;
     transition: 500ms ease;
-    font-size: 20px;
-    width: 48px;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
     border: 2px solid #4518a0;
+}
+.audio-btns {
+    margin-right: 10px;
 }
 .bgcontainer span i.fa:hover {
     border: 2px solid black;
@@ -560,12 +568,12 @@ input[type=range]::-ms-thumb {
 .forms > div#new, #update {
     display: none;
 }
-.forms > div form#new-list-songs {
+.forms > div form .new-list-songs {
     max-height: 250px;
     overflow-y: auto;
     overflow-x: hidden;
 }
-#new-list-songs::-webkit-scrollbar-track
+.forms > div form .new-list-songs::-webkit-scrollbar-track
 {
 border: 1px solid #9923c7;
 background-color: #F5F5F5;
@@ -573,13 +581,13 @@ border-radius: 50%;
 width: 2px;
 }
 
-#new-list-songs::-webkit-scrollbar
+.forms > div form .new-list-songs::-webkit-scrollbar
 {
 width: 5px;
 background-color: #F5F5F5;
 }
 
-#new-list-songs::-webkit-scrollbar-thumb
+.forms > div form .new-list-songs::-webkit-scrollbar-thumb
 {
 background-color: #9923c7;
 }
