@@ -19,11 +19,11 @@ $( document ).ready(function() {
 
         if (playPromise !== undefined) {
           playPromise.then(_ => {
-            console.log('song is playing');
+            // console.log('song is playing');
           })
           .catch(error => {
             pause.trigger('click');
-            console.log('song promise failed=> '+error)
+            // console.log('song promise failed=> '+error)
           });
         }
         $(this).hide();
@@ -47,7 +47,7 @@ $( document ).ready(function() {
                     i++;
                     if(i === 10) {
                         window.clearInterval(durationIntrvl);
-                        reject(console.log('error'));
+                        // reject(console.log('error'));
                     }
                 },500)
             }
@@ -135,10 +135,9 @@ $( document ).ready(function() {
         const nextSongLink = $('.right ol li[data-index="'+nextIndex+'"]').attr('data-link');
         if (nextIndex > $('.right .song-list-sheet li').length) { 
             window.clearInterval(timeCounter);
-            console.log('list ended');
+            // console.log('list ended');
         } else if (nextIndex < 0) {
             window.clearInterval(timeCounter);
-            console.log('this is the first song');
         } else { // pause playing if this was the last song
             $(song).attr('src',nextSongLink)
                 .attr('data-index',nextIndex);

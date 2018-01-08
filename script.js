@@ -2,13 +2,11 @@
 
 const allPlaylists = [];
 $( document ).ready(function() {
-    console.log( "ready!" );
-
-    const getAlbums = ({isFirst, searchBy}) => {
+    const getAlbums = ({isFirst, searchBy, chars=0}) => {
         $('#album-list').html('');
         $.get('api/playlist', function (result) {
             let albums = result['data'];
-            let filteredAlbums = searchBy ? albums.filter(album=> {
+            let filteredAlbums = (searchBy || {}).length >chars ? albums.filter(album=> {
                 return album.name.toLowerCase().includes(searchBy.toLowerCase()) ? album : null;
             }) : albums;
             $.each(filteredAlbums, function (i, e) {
@@ -80,7 +78,7 @@ $( document ).ready(function() {
             $('.playlist .confirm-del').click(function () { // confirm before playlist delete
                 const id = $(this).closest('.playlist').attr('data-id');
                 $.delete('./api/playlist/'+id,function (result) {
-                    console.log(result);
+                    // console.log(result);
                 })
                     .success(()=>{
                         swal('Done!','Your playlist was deleted!','success');
@@ -131,6 +129,23 @@ $( document ).ready(function() {
                     });
                 });
                 $('.playlist-player .edit').click(function () {
+                    let id = $(this).closest('.playlist').attr('data-id');
+                    let playlist = allPlaylists.filter( album => album.id == id )[0];
+                    $('#update #name').val(playlist.name).attr('data',id);
+                    $('#update #image').val(playlist.image).trigger('change');
+
+                    playlist.songs.forEach(song=> {
+                        const songbox = $('#new #song-box').clone();
+                        $('#update .new-list-songs').append(songbox.hide());
+                        songbox.append('<i class="fa fa-trash song-remove" aria-hidden="true"></i>\n')
+                        songbox.removeAttr('id').slideDown().find('input').val('');
+                        songbox.find('input[name="song"]').val(song.name);
+                        songbox.find('input[name="link"]').val(song.url);
+                        $('#update .song-remove').click(function () {
+                            $(this).closest('.song').slideUp();
+                            setTimeout(()=>{$(this).closest('.song').remove();},500);
+                        });
+                    });
                     $('#update').slideDown();
                 });
         })
@@ -148,22 +163,23 @@ $( document ).ready(function() {
         $(this).css('background','#130419');
     })
     
-    $('#add-song').click(function () { // add song input to new playlist form
-        const song = $('#song-box').clone();
-        $('.new-list-songs').append(song.hide());
+    $('#new #add-song').click(function () { // add song input to new playlist form
+        const song = $('#new #song-box').clone();
+        $('#new .new-list-songs').append(song.hide());
         song.append('<i class="fa fa-trash song-remove" aria-hidden="true"></i>\n')
         song.removeAttr('id').slideDown().find('input').val('');
-        $('.song-remove').click(function () {
+        $('#new .song-remove').click(function () {
             $(this).closest('.song').slideUp();
             setTimeout(()=>{$(this).closest('.song').remove();},500);
         });
     })
     
-    $('#new div.new-playlist').submit(function(e) { // new playlist form submit action
+    $('div.new-playlist').submit(function(e) { // new playlist form submit action
         e.preventDefault();
+        let action = $(this).parent().attr('id');
         let reqFlag = 1;
-        let listName = $('#new .new-playlist #name');
-        let listImage = $('#new .new-playlist #image');
+        let listName = $(this).closest('.new-playlist').find('#name');
+        let listImage = $(this).closest('.new-playlist').find('#image');
         if(listName.val().length > 20){
             reqFlag = 0;
             listName.closest('.new-list-name').find('.error').css('display','block');
@@ -174,7 +190,7 @@ $( document ).ready(function() {
         } else { listImage.closest('.new-list-img').find('.error').hide(); }
 
         let newSongs = [];
-        $('.song').each(function (index) {
+        $(this).find('.song').each(function (index) {
             newSongs.push({
                 name: $(this).find('input[name="song"]').val().replace('.mp3',''),
                 url: $(this).find('input[name="link"]').val()
@@ -185,26 +201,53 @@ $( document ).ready(function() {
             image: listImage.val(),
             songs: newSongs
         };
-        reqFlag === 1 ?
-        $.post('./api/playlist',data ,function (result) {})
-            .success(()=>{
-                swal('Done!','Your playlist was added!','success');
-                $('#new input').not('.submit').val('').closest('#new').fadeOut();
-                getAlbums({isFirst: 'yes'});
-            })
-            .fail(()=>{swal(
+        if (action === "new") {
+            reqFlag === 1 ?
+            $.post('./api/playlist',data ,function (result) {})
+                .success(()=>{
+                    swal('Done!','Your playlist was added!','success');
+                    $('#new input').not('.submit').val('').closest('#new').fadeOut();
+                    getAlbums({isFirst: 'yes'});
+                })
+                .fail(()=>{swal(
+                    'Oops...',
+                    'Something went wrong!',
+                    'error'
+                )}) : swal(
                 'Oops...',
-                'Something went wrong!',
+                'Please fill the form correctly!',
                 'error'
-            )}) : swal(
-            'Oops...',
-            'Please fill the form correctly!',
-            'error'
-            ) ;
+                ) ;
+            } else {
+                let id = listName.attr('data');
+                reqFlag === 1 ?
+                $.post('./api/playlist/'+id ,{ 
+                    name: data.name,
+                    image: data.image
+                 } ,function (result) {})
+                    .success(()=>{
+                        // console.log(newSongs);
+                        $.post('./api/playlist/'+id+"/songs", { songs: newSongs }, ()=>{
+                            swal('Done!','Your playlist was updated!','success');
+                            $('#new input').not('.submit').val('').closest('#new').fadeOut();
+                            getAlbums({isFirst: 'yes'});
+                            $('#update .fa-times').trigger('click');
+                        });
+                    })
+                    .fail(()=>{swal(
+                        'Oops...',
+                        'Something went wrong!',
+                        'error'
+                    )}) : swal(
+                    'Oops...',
+                    'Please fill the form correctly!',
+                    'error'
+                    ) ;
+            }
     });
 
-    $('#update .new-playlist').submit(function(){
-
+    $('#update .fa-times').click(function(){
+        $('#update .new-list-songs').html('<h4>List Songs</h4>');
     });
 
     $('.forms').click(function(){
@@ -214,7 +257,7 @@ $( document ).ready(function() {
         e.stopPropagation();
     });
     $('.search-playlist').click(function(){
-        $('.search-form').slideToggle();
+        $('.search-form').toggleClass('open');
     });
 
     $('.new-playlist #image').change(function(){
@@ -230,7 +273,8 @@ $( document ).ready(function() {
     // filter albums
     $('#search').keyup(function(e){
         let searchTerm = $(this).val();
-        getAlbums({isFirst: 'no', searchBy: searchTerm });
+        searchTerm.length > 1 || searchTerm.length === 0 ? 
+        getAlbums({isFirst: 'no', searchBy: searchTerm, chars: 1 }): null;
     });
 });
 
@@ -275,9 +319,7 @@ class Playlist {
             });
             if (isFirst==="yes") {
                 allPlaylists.push({id: this.id, name: this.name, image: this.image, songs: result.data.songs });
-            } else {
-                console.log("not first: "+this.name);
-            }
+            } 
         });
         return playlist;
     };

@@ -33,6 +33,14 @@
     .mid {
         padding: 15px;
     }
+    button.search-playlist {
+        right: 6.25%;
+        width: 4%;
+    }
+    button.add-playlist {
+        left: 6.25%;
+        width: 4%;
+    }
 }
 
 @media screen and (max-width: 767px) {
@@ -84,6 +92,18 @@
         height: 30px;
         padding: 5px;
         font-size: 16px;
+    }
+    .search-form{
+        width: 60%;
+        right: 20%;
+    }    
+    button.search-playlist {
+        right: 4.95%;
+        width: 6%;
+    }
+    button.add-playlist {
+        left: 4.95%;
+        width: 6%;
     }
 }
 
@@ -141,7 +161,17 @@
         font-size: 12px;
         padding: 3px;
     }
-
+    .search-form label{
+        display: none;
+    }
+    button.search-playlist {
+        right: 2.7%;
+        width: 8%;
+    }
+    button.add-playlist {
+        left: 2.7%;
+        width: 8%;
+    }
 }
 @media screen and (max-width: 380px) {
     .bgcontainer {
@@ -153,5 +183,13 @@
     }
     .mid .times {
         font-size: 10px;
+    }
+    button.search-playlist {
+        right: 1%;
+        width: 10%;
+    }
+    button.add-playlist {
+        left: 1%;
+        width: 10%;
     }
 }

@@ -6,11 +6,16 @@ body {
 body::-webkit-scrollbar{
     display: none;
 }
+.container::-webkit-scrollbar{
+    display: none;
+}
 
-.container::-webkit-scrollbar-track
+/* .container::-webkit-scrollbar-track
 {
     border: 1px solid #9923c7;
     background-color: #F5F5F5;
+    border-radius: 50%;
+    width: 2px;
 }
 
 .container::-webkit-scrollbar
@@ -22,7 +27,7 @@ body::-webkit-scrollbar{
 .container::-webkit-scrollbar-thumb
 {
     background-color: #9923c7;
-}
+} */
 
 object {
     position: fixed;
@@ -54,23 +59,31 @@ i.fa {
     overflow-x: hidden;
     border: inset 10px #130419;
 }
-.container button.add-playlist {
-    background: no-repeat;
+button.add-playlist {
     border: none;
     color: white;
     font-size: 20px;
+    width: 4%;
     position: absolute;
-    left: 0;
+    left: 7%;
+    top: 70px;
     padding: 5px;
+    background: black;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
 }
-.container button.search-playlist {
-    background: no-repeat;
+ button.search-playlist {
     border: none;
     color: white;
     font-size: 20px;
+    width: 4%;
     position: absolute;
-    right: 0;
+    right: 7%;
+    top: 70px;
     padding: 5px;
+    background: black;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
 }
 .playlist {
     width: 150px;
@@ -476,6 +489,7 @@ input[type=range]::-ms-thumb {
     right: 0;
     padding: 100px 150px;
     background: rgba(44,3,44,0.5);
+    z-index: 3;
 }
 .forms > div > .new-playlist {
     padding: 50px;
@@ -546,6 +560,29 @@ input[type=range]::-ms-thumb {
 .forms > div#new, #update {
     display: none;
 }
+.forms > div form#new-list-songs {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#new-list-songs::-webkit-scrollbar-track
+{
+border: 1px solid #9923c7;
+background-color: #F5F5F5;
+border-radius: 50%;
+width: 2px;
+}
+
+#new-list-songs::-webkit-scrollbar
+{
+width: 5px;
+background-color: #F5F5F5;
+}
+
+#new-list-songs::-webkit-scrollbar-thumb
+{
+background-color: #9923c7;
+}
 .forms > div form#new-list-songs .song {
     display: flex;
 }
@@ -613,13 +650,24 @@ ol.song-list-sheet::-webkit-scrollbar-thumb
 /* search form style */
 .search-form {
     position: fixed;
-    width: 100%;
+    text-align: center;
+    height: 40px;
+    width: 74%;
+    right: 13%;
     padding: 5px 0 5px 20px;
     background: #130419;
-    display: none;
+    margin-left: 00%;
+    top: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: 300ms ease;
+    transform: translateY(20px) rotateX(90deg);
+}
+.search-form.open {
+    transform: none;
 }
 .search-form label {
-    margin: 0 20px;
+    margin-right: 10px;
     font-size: 20px;
     color: white;
 }
@@ -638,6 +686,7 @@ ol.song-list-sheet::-webkit-scrollbar-thumb
     width: 26px;
     height: 26px;
     padding: 0;
+    display: none;
 }
 .search-form .search-submit:hover {
     background: #9923c7; 

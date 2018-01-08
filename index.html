@@ -33,9 +33,9 @@
 </head>
 <body>
 <object type="text/html" data="background.html"></object>
+<button class="add-playlist"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+<button class="search-playlist"><i class="fa fa-search" aria-hidden="true"></i></button>
     <container class="container">
-        <button class="add-playlist"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-        <button class="search-playlist"><i class="fa fa-search" aria-hidden="true"></i></button>
         <div id="album-list"></div>
     </container>
     <form action="#" class="search-form">
@@ -56,7 +56,7 @@
                 <span id="pause" style="display: none;"><i class="fa fa-pause" aria-hidden="true"></i></span>
                 <span id="vol-up" class="vol" onclick="document.getElementById('player').volume += 0.1"><i class="fa fa-volume-up" aria-hidden="true"></i></span>
                 <span id="vol-dn" class="vol" onclick="document.getElementById('player').volume -= 0.1"><i class="fa fa-volume-down" aria-hidden="true"></i></span>
-                <span id="vol-none" class="vol-none" onclick="document.getElementById('player').volume = 0" style="display:inline-block"><i class="fa fa-volume-off" aria-hidden="true"></i></span>
+                <!-- <span id="vol-none" class="vol-none" onclick="document.getElementById('player').volume = 0" style="display:inline-block"><i class="fa fa-volume-off" aria-hidden="true"></i></span> -->
                 <div class="times"><b id="song-now">00 : 00</b> | <b id="song-total">00 : 00</b></div>
                 <nav class="vol-bar">
                     <input type="range" id="current-vol">
@@ -131,16 +131,6 @@
             <form id="new-list-songs">
                 <div class="new-list-songs">
                     <h4>List Songs</h4>
-                    <div id="song-box" class="song">
-                        <span class="song-field">
-                            <label> Name: </label>
-                            <input name="song" type="text" placeholder=" Song Name" required>
-                        </span>
-                        <span class="song-field">
-                            <label> URL: </label>
-                            <input name="link" type="url" placeholder=" Song URL" required>
-                        </span>
-                    </div>
                 </div>
             <div>
                 <input type="button" id="add-song" class="submit" value="Add Song">
